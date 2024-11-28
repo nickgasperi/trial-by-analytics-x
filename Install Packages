@@ -1,7 +1,10 @@
 # if you are new to RStudio, run this command to install necessary packages
 
-  install.packages(c("tidyverse", "ggrepel"))
+  install.packages("tidyverse")
+  install.packages("ggrepel")
 
 # if you have not used the NFL play-by-play dataset before, run this command
 
-  install.packages(c("nflfastR", "nflreadr", "nflplotR"))
+  install.packages("nflfastR")
+  install.packages("nflreadr")
+  install.packages("nflplotR")
