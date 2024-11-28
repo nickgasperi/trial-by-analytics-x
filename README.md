@@ -1,4 +1,4 @@
-The _X-Posts-Code_ repository works in conjunction with Trial By Analysis (@tbanalysis) on X.
+The _X-Posts-Code_ repository works in conjunction with Trial By Analytics (@tbanalysis) on X.
 
 	https://x.com/tbanalysis?s=21
 
