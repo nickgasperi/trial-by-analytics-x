@@ -31,6 +31,7 @@
     arrange(-epa)%>%
     print(n = Inf)
 
+## use ggplot to create plot
 ## use text repel to reduce data label overlapping with aesthetics to add player name for each data point
 ## geom_nfl_logos also adds player's team logo to each data point
 ## use geom hline and vline to plot averages for each axis
