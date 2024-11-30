@@ -2,6 +2,9 @@
 
   install.packages("tidyverse")
   install.packages("ggrepel")
+  install.packages("ggimage")
+  install.packages("gt")
+  install.packages("gtExtras")
 
 # if you have not used the NFL play-by-play dataset before, run this command
 
