@@ -57,6 +57,9 @@
   hsizedata %>%
     print(n = Inf)
 
+# the correlation between success rate and hand size is -0.44
+  cor.test(hsizedata$sucrate, hsizedata$handsize)
+
 # create plot
   hsizeplot = ggplot(data = hsizedata, aes(x = sucrate, y = handsize)) +
     geom_nfl_logos(aes(team_abbr = posteam,
