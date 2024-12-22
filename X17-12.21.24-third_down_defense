@@ -17,7 +17,7 @@
            !is.na(epa),
            !is.na(success),
            down == 3,
-           ydstogo <= 5,
+           ydstogo <= 3,
            ) %>%
     group_by(defteam) %>%
     summarize(plays = n(),
@@ -52,6 +52,6 @@
   ggsave("X post 17.1 - def_shortyd3rd.png",
          width = 14, height = 10, dpi = "retina")
 
-# to create second plot change [ ydstogo <= 5 ] to [ ydstogo >= 6 ]
+# to create second plot change [ ydstogo <= 5 ] to [ ydstogo >= 7 ]
 # also change titles
 # also change .png file name when saving
