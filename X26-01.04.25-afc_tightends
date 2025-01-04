@@ -67,7 +67,7 @@
   plotafc1
 
 # save plot 1
-  ggsave("X post 27.1 - afc_tightends.png",
+  ggsave("X post 26.1 - afc_tightends.png",
          width = 10.5, height = 7, dpi = "retina")
 
 # to create plot 2 - switch yards with epa
