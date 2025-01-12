@@ -37,7 +37,7 @@
     geom_nfl_logos(aes(team_abbr = posteam), width = 0.07) +
     theme_minimal() +
     labs(title = "EPA Per Pass Attempt",
-         subtitle = "2024 NFL Wildcard Weekend - Day 1",
+         subtitle = "2024 NFL Wild Card Weekend - Day 1",
          caption = "By Nick Gasperi | @tbanalysis | Data @nflfastR",
          x = "EPA/Attempt") +
     theme(legend.position = "none",
