@@ -55,7 +55,7 @@
                     aes(label = text3, color = posteam, fontface = "bold.italic")) +
     scale_color_nfl(type = "primary") +
     labs(title = "Passing Volume vs. Efficiency",
-         subtitle = "2016-2024 Regular Seasons",
+         subtitle = "2016-2024 NFL Regular Seasons",
          caption = "By Nick Gasperi | @tbanalysis | Data @nflfastR",
          x = "Pass Attempts", y = "EPA/Pass Attempt") +
     theme_minimal() +
