@@ -1,60 +1,40 @@
-## load packages
-  library(ggplot2)
-  library(ggrepel)
-  library(nflreadr)
-  library(nflfastR)
-  library(nflplotR)
+library(tidyverse)
+library(nflfastR)
+library(nflplotR)
+nflreadr::clear_cache()
+###
+data24 = load_pbp(2024)
+###
+passing24 = data24%>%
+  filter(week < 12, play_type == "pass", !is.na(air_yards))
+###
+qbepa = passing24 %>%
+  filter(!is.na(epa))%>%
+  group_by(passer,
+           team = posteam)%>%
+  summarize(att = n(),
+            epa = mean(epa),
+            .groups = "drop")%>%
+  filter(att > 158)%>%
+  arrange(att)%>%
+  print(n = Inf)
+##
+plotqbepa1 = ggplot(data = qbepa, aes(x = epa, y = reorder(passer,epa)))+
+  geom_col(aes(color = team, fill = team), width = .6)+
+  scale_color_nfl(type = "secondary")+
+  scale_fill_nfl(alpha = .7)+
+  geom_nfl_logos(aes(team_abbr = team), width = 0.033, alpha = 0.75)+
+  labs(title = "2024 QB EPA Per Attempt",
+       subtitle = "Thru Week 11 (min. 158 att.)",
+       x = "EPA Per Attempt",
+       y = "",
+       caption = "By Nick Gasperi | Data @nflfastR")+
+  theme_bw()+
+  theme(plot.title = element_text(face = "bold", hjust = 0.5, size =15),
+        plot.subtitle = element_text(hjust = 0.5, size = 10),
+        axis.text = element_text(face = "bold"),
+        axis.title = element_text(face = "bold", size = 10))
+plotqbepa1
 
-## clear cache when starting new R session  
-  nflreadr::clear_cache()
 
-## load 2024 data
-  data24 = load_pbp(2024)
-
-## filter data to include only passing plays through week 11
-  passing24 = data24 %>%
-    filter(week < 12,
-            play_type == "pass",
-            !is.na(air_yards))
-            
-## select data to plot in next step
-## group by passer and passer_id to avoid duplicate passer names
-## drop groups to avoid warrning message
-## filter to include only passers who have thrown at least 159 pass attempts
-## arrange by attempts to make sure you are not including unwanted passers
-  qbepa = passing24 %>%
-    filter(!is.na(epa))%>%
-    group_by(passer,
-             passer_id,
-             team = posteam)%>%
-    summarize(att = n(),
-              epa = mean(epa),
-              .groups = "drop")%>%
-    filter(att > 158) %>%
-    arrange(att)%>%
-    print(n = Inf)
-
-  ## use ggplot to create plot
-  ## use reorder inside y axis aesthetics to force plot to sort by epa descending
-  ## use aesthetics inside geom_col; scale_color_nfl; and scale_fill_nfl to attach team color to each data point
-  ## use geom_nfl logos to attach team logo at end of each data point
-  ## use theme() command to format plot title and axis title elements
-  ## change caption to your name, or remove from code for no caption
-    plotqbepa1 = ggplot(data = qbepa, aes(x = epa, y = reorder(passer, epa)))+
-    geom_col(aes(color = team, fill = team), width = .6)+
-    scale_color_nfl(type = "secondary")+
-    scale_fill_nfl(alpha = .7)+
-    geom_nfl_logos(aes(team_abbr = team), width = 0.033, alpha = 0.75)+
-    labs(title = "2024 QB EPA Per Attempt",
-         subtitle = "Thru Week 11 (min. 158 att.)",
-         x = "EPA Per Attempt",
-         y = "",
-         caption = "By Nick Gasperi | Data @nflfastR")+
-    theme_bw()+
-    theme(plot.title = element_text(face = "bold", hjust = 0.5, size =15),
-          plot.subtitle = element_text(hjust = 0.5, size = 10),
-          axis.text = element_text(face = "bold"),
-          axis.title = element_text(face = "bold", size = 10))
-
-##view the plot
-  plotqbepa1
+# + expand limits(x = -0.45)
