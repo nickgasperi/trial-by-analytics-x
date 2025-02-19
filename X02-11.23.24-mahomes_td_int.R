@@ -1,34 +1,28 @@
-##load packages
-  library(ggplot2)
-  library(ggrepel)
-  library(nflreadr)
-  library(nflfastR)
-  library(nflplotR)
+#load packages
+library(tidyverse)
+library(dplyr)
+library(nflfastR)
+library(nflplotR)
+library(nflreadr)
+library(ggplot2)
 
-## clear cache when starting new R session  
-  nflreadr::clear_cache()
+# load NFL data from 2018 to 2024
+nfldata81 = load_pbp(2018:2024)
 
-## load NFL data from 2018 to 2024
-pbpallpass = load_pbp(2018:2024)
-
-## filter data to include only passing plays
-setpass1 = pbpallpass %>%
-  filter(play_type == "pass", !is.na(air_yards))
-  
-## filter data to include only passes thrown by Patrick Maomes in the regular season
-## group by passer and season
-## summarize to create data points - best practice to add Mahomes' playerid to protect from duplicate names
-## drop groups at end to avoid warning message
-mahomesallpass = setpass1 %>%
-  filter(passer == "P.Mahomes",
-         season_type == "REG"
-         )%>%
-  group_by(passer, season)%>%
-  summarize(playergsid = "00-0033873",
-            ratiotdint = (sum(touchdown)/sum(interception)),
+# filter data to include only passes thrown by Mahomes
+# 
+mahomesallpass = pbpallpass %>%
+  filter(  "P.Mahomes",
+         play_type == "pass",
+         !is.na(air_yards)) %>%
+  group_by(passer_player_id, passer_player_name, season, posteam) %>%
+  summarize(ratiotdint = (sum(touchdown)/sum(interception)),
             td = sum(touchdown),
             int = sum(interception),
-            .groups = "drop")
+            .groups = "drop") %>%
+    print(n = Inf)
+
+            
             
 ## use ggplot to create plot
 ## use geom_nfl_headshots to add player image to each data point
