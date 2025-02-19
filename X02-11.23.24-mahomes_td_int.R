@@ -30,7 +30,7 @@ mahomesdata1 = nfldata15 %>%
 mahomesratioplot = ggplot(data = mahomesdata1, 
                           aes(x = season, y = tdint))+
   labs(title = "Mahomes Touchdown to Interception Ratio By Year",
-       subtitle = "Regular & Postseason",
+       subtitle = "Regular Season & Postseason",
        caption = "By Nick Gasperi | @tbanalysis | Data @nflfastR",
        x = "Season", y = "TD:Int Ratio",
        tag = "00-0033873")+
@@ -41,7 +41,7 @@ mahomesratioplot = ggplot(data = mahomesdata1,
   theme_minimal()+
   theme(legend.position = "none",
         plot.background = element_rect(fill = "#F0F0F0"),
-        plot.tag = element_nfl_headshot(size = 4.75, hjust = 1, vjust = 1),
+        plot.tag = element_nfl_headshot(size = 5, hjust = 1, vjust = 1),
         plot.tag.position = c(1,1),
         plot.title = element_text(face = "bold", hjust = 0, size = 18),
         plot.subtitle = element_text(hjust = 0, size = 16),
