@@ -5,9 +5,6 @@
   library(nflfastR)
   library(nflplotR)
 
-## clear cache when starting new R session  
-  nflreadr::clear_cache()
-
 ## load 2024 NFL data
   data1 = load_pbp(2024)
 
