@@ -24,9 +24,7 @@ mahomesdata1 = nfldata15 %>%
   mutate(tdint = round(tdint, digits = 1)) %>%
   print(n = Inf)
 
-## use geom_nfl_headshots to add player image to each data point
-## define color as red within geom_line to match team color
-## use theme() command to format plot title elements
+# create plot
 mahomesratioplot = ggplot(data = mahomesdata1, 
                           aes(x = season, y = tdint))+
   labs(title = "Mahomes Touchdown to Interception Ratio By Year",
