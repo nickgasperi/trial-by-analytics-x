@@ -5,7 +5,7 @@ library(nflreadr)
 library(nflfastR)
 library(nflplotR)
 
-# load 2024 NFL data
+# load data
 data1 = load_pbp(2024)
 
 # before filtering, define group of players to include J.Daniels; C.Williams; D.Maye; B.Nix
