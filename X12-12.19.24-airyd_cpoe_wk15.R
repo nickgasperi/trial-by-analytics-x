@@ -1,6 +1,5 @@
 # load packages
   library(tidyverse)
-  library(dplyr)
   library(ggplot2)
   library(nflfastR)
   library(nflplotR)
@@ -35,10 +34,14 @@
 
 # plot the data
   wk15passplot = ggplot(data = datawk15, aes(x = airyd, y = cpoe)) +
-    geom_nfl_logos(aes(team_abbr = posteam), width = 0.038) +
-    geom_text_repel(box.padding = 0.4, aes(label = passer_player_name)) +
-    geom_hline(yintercept = mean(datawk15$cpoe), linetype = "dashed", color = "red") +
-    geom_vline(xintercept = mean(datawk15$airyd), linetype = "dashed", color = "red") +
+    geom_nfl_logos(aes(team_abbr = posteam),
+                   width = 0.038) +
+    geom_text_repel(box.padding = 0.4,
+                    aes(label = passer_player_name)) +
+    geom_hline(yintercept = mean(datawk15$cpoe),
+               linetype = "dashed", color = "red") +
+    geom_vline(xintercept = mean(datawk15$airyd),
+               linetype = "dashed", color = "red") +
     geom_smooth(method = "lm", se = FALSE, color = "grey") +
     labs(title = "Air Yards vs. CPOE Per Attempt",
          subtitle = "2024 NFL Week 15 | Passing Plays (min. 3 att.)",
