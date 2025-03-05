@@ -1,5 +1,5 @@
 # load packages
-library(ggplot2)
+library(tidyverse)
 library(ggrepel)
 library(nflreadr)
 library(nflfastR)
@@ -26,7 +26,7 @@ wk11_24_pass_air_epa = pbp24 %>%
 
 # use ggplot to create plot
 # use text repel to reduce data label overlapping with aesthetics to add player name for each data point
-# geom_nfl_logos also adds player's team logo to each data point
+# geom_nfl_logos  adds player's team logo to each data point
 # use geom hline and vline to plot averages for each axis
 plot221 = ggplot(data = wk11_24_pass_air_epa, aes(x = ydair, y = epa)) +
   labs(title = "2024 Week 11 Passing Performance",
@@ -43,3 +43,7 @@ plot221 = ggplot(data = wk11_24_pass_air_epa, aes(x = ydair, y = epa)) +
 
 # view plot
 plot221
+
+# save plot
+ggsave("X post 1 - wk11_passing.png",
+       width = 14, height = 10, dpi = "retina")
