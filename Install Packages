@@ -5,6 +5,7 @@
   install.packages("ggimage")
   install.packages("gt")
   install.packages("gtExtras")
+  install.packages("gghighlight")
 
 # if you have not used the NFL play-by-play dataset before, run this command
 
