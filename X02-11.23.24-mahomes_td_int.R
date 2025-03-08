@@ -16,13 +16,13 @@ mahomesdata1 = nfldata15 %>%
   group_by(passer_player_id,
            passer_player_name,
            season,
-           posteam) %>%                   # include posteam for later viz
+           posteam) %>%           # include posteam for later viz
   summarize(att = n(),
             td = sum(touchdown),
             int = sum(interception),
             tdint = td/int) %>%                 # create TD:Int Ratio for plot in next step
   mutate(tdint = round(tdint, digits = 1)) %>%
-  print(n = Inf)                                # print all rows
+  print(n = Inf)                # print all rows
 
 # plot Mahomes TD:Int Ratio by Season
 mahomesratioplot = ggplot(data = mahomesdata1, 
@@ -31,11 +31,11 @@ mahomesratioplot = ggplot(data = mahomesdata1,
        subtitle = "Regular Season & Postseason",
        caption = "By Nick Gasperi | @tbanalysis | Data @nflfastR",
        x = "Season", y = "TD:Int Ratio",
-       tag = "00-0033873") +                                    # adding this tag allows us to add player image later
+       tag = "00-0033873") +                             # adding this tag allows us to add player image later
   geom_line(aes(color = posteam), linewidth = 1.3) +
   geom_point(aes(color = posteam), size = 3) +
-  scale_color_nfl(type = "primary") +             # specify which team color will fill plot elements 
-  scale_x_continuous(n.breaks = 7) +              # specify number of values listed on x axis to make sure all seasons are included
+  scale_color_nfl(type = "primary") +            # specify which team color will fill plot elements 
+  scale_x_continuous(n.breaks = 7) +             # specify number of values listed on x axis to make sure all seasons are included
   theme_minimal()+
   theme(legend.position = "none",
         plot.background = element_rect(fill = "#F0F0F0"),
