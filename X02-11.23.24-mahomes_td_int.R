@@ -1,41 +1,41 @@
 #load packages
-library(tidyverse)
-library(dplyr)
+library(tidyverse)    # data wrangling
 library(nflfastR)
 library(nflplotR)
 library(nflreadr)
-library(ggplot2)
-library(ggrepel)
+library(ggrepel)      # replaces geom_text
 
-# load NFL data from 2018 to 2024
+# load NFL data from 2018 to 2024 seasons
 nfldata15 = load_pbp(2018:2024)
 
-# filter data to include only passes thrown by Mahomes
-# summarize td, int, and ratio by year
+# wrangle data into new tibble
 mahomesdata1 = nfldata15 %>%
   filter(passer_player_name == "P.Mahomes",
          play_type == "pass",
-         !is.na(air_yards)) %>%
-  group_by(passer_player_id, passer_player_name, season, posteam) %>%
+         !is.na(air_yards)) %>%            # include only passes thrown by Mahomes
+  group_by(passer_player_id,
+           passer_player_name,
+           season,
+           posteam) %>%                   # include posteam for later viz
   summarize(att = n(),
             td = sum(touchdown),
             int = sum(interception),
-            tdint = td/int) %>%
+            tdint = td/int) %>%                 # create TD:Int Ratio for plot in next step
   mutate(tdint = round(tdint, digits = 1)) %>%
-  print(n = Inf)
+  print(n = Inf)                                # print all rows
 
-# create plot
+# plot Mahomes TD:Int Ratio by Season
 mahomesratioplot = ggplot(data = mahomesdata1, 
                           aes(x = season, y = tdint))+
   labs(title = "Mahomes Touchdown to Interception Ratio By Year",
        subtitle = "Regular Season & Postseason",
        caption = "By Nick Gasperi | @tbanalysis | Data @nflfastR",
        x = "Season", y = "TD:Int Ratio",
-       tag = "00-0033873")+
-  geom_line(aes(color = posteam), linewidth = 1.3)+
+       tag = "00-0033873") +                                    # adding this tag allows us to add player image later
+  geom_line(aes(color = posteam), linewidth = 1.3) +
   geom_point(aes(color = posteam), size = 3) +
-  scale_color_nfl(type = "primary") +
-  scale_x_continuous(n.breaks = 7) +
+  scale_color_nfl(type = "primary") +             # specify which team color will fill plot elements 
+  scale_x_continuous(n.breaks = 7) +              # specify number of values listed on x axis to make sure all seasons are included
   theme_minimal()+
   theme(legend.position = "none",
         plot.background = element_rect(fill = "#F0F0F0"),
@@ -50,6 +50,6 @@ mahomesratioplot = ggplot(data = mahomesdata1,
 # view plot
 mahomesratioplot
 
-# save plot
+# save plot to local files on your device
 ggsave("X post 2 - mahomes_tdint.png",
        width = 10.5, height = 7, dpi = "retina")
