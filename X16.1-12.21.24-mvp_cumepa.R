@@ -12,7 +12,7 @@ epadata = nfldata %>%
   filter(play_type == "pass" | play_type == "run",
          id == "00-0034796" | id == "00-0034857",
          qb_kneel == 0, qb_spike == 0,
-         !is.na(epa)) %>% 
+         !is.na(epa)) %>%       # exclude QB spikes and kneels as they do not offer value when gauging player efficiency
   group_by(play_id,
            id,
            name,
