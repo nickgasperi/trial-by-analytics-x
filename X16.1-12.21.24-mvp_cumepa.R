@@ -21,7 +21,7 @@ epadata = nfldata %>%
             .groups = "drop") %>%
   print(n = 15)
 
-# add cumulative EPA column
+# add cumulative EPA column to existing tibble
 epadata$cumepa = ave(epadata$epa, epadata$name, FUN = cumsum)
 
 # establish last plays for player image in ggplot
