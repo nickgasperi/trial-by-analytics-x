@@ -1,13 +1,11 @@
 # load packages
-library(tidyverse)
-library(dplyr)
-library(ggplot2)
+library(tidyverse)      # data wrangling
 library(nflfastR)
 library(nflplotR)
 library(nflreadr)
-library(ggrepel)
+library(ggrepel)        # replaces geom_text
 
-# load data
+# load NFL data from 2024 season
 data3 = load_pbp(2024)
 
 # filter data
@@ -63,6 +61,6 @@ plotwr1 = ggplot(data = wrdata1, aes(x = cumtgts, y = cumepa)) +
 # view plot
 plotwr1
 
-# save plot
+# save plot to device's local files
 ggsave("X post 30 - wr_comp_epa.png",
        width = 10.5, height = 7, dpi = "retina")
