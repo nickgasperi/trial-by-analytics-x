@@ -21,6 +21,7 @@ cinLogo = readPNG(image) %>%
 nfldata = load_pbp(2024)
 
 # filter data
+# include only regular season plays with a targeted receiver
 wrdata6 = nfldata %>%
   filter(week < 19,
          !is.na(yards_gained),
@@ -38,8 +39,6 @@ wrdata6$cumtgts = ave(wrdata6$tgts, wrdata6$receiver_player_id, FUN = cumsum)
 framewr6 = wrdata6 %>%
   filter(play_id == "5028") %>%
   print(n = Inf)
-
-# create image 
 
 # plot data
 wrplot6 = ggplot(data = wrdata6, aes(x = play_id, y = cumyds, group = receiver_player_id)) +
