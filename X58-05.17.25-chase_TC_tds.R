@@ -21,53 +21,57 @@ cinLogo = readPNG(image) %>%
 nfldata = load_pbp(2024)
 
 # filter data
-# include only regular season plays with a targeted receiver
-wrdata7 = nfldata %>%
+# include only regular season passing plays
+wrdata8 = nfldata %>%
   filter(week < 19,
+         play_type == "pass",
          !is.na(receiver_player_id)) %>%
-  group_by(play_id, receiver_player_id, receiver_player_name, posteam) %>%
+  group_by(week, receiver_player_id, receiver_player_name, posteam) %>%
   summarize(tgt = n(),
-            rec = complete_pass,
+            td = sum(touchdown == 1 &
+                       td_team == posteam &
+                       td_player_id == receiver_player_id),
             .groups = "drop")
 
-# create cumulative rec yds and targets columns
-wrdata7$cumtgt = ave(wrdata7$tgt, wrdata7$receiver_player_id, FUN = cumsum)
-wrdata7$cumrec = ave(wrdata7$rec, wrdata7$receiver_player_id, FUN = cumsum)
+# create cumulative rec tds and targets columns
+wrdata8$cumtgt = ave(wrdata8$tgt, wrdata8$receiver_player_id, FUN = cumsum)
+wrdata8$cumtd = ave(wrdata8$td, wrdata8$receiver_player_id, FUN = cumsum)
 
-# frame last play for later future labeling
-framewr7 = wrdata7 %>%
-  filter(play_id == "5028") %>%
+# frame last week for later future labeling
+framewr8 = wrdata8 %>%
+  filter(week == 18,
+         receiver_player_id == "00-0036900") %>%
   print(n = Inf)
 
 # plot data
-# use gghighlight to emphasize J.Chase data point
-wrplot7 = ggplot(data = wrdata7, aes(x = play_id, y = cumrec, group = receiver_player_id)) +
+# use gghighlight() to emphasize J.Chase data point
+wrplot8 = ggplot(data = wrdata8, aes(x = week, y = cumtd, group = receiver_player_id)) +
   geom_line(aes(color = "#FF5C00"),
             linewidth = 1.0) +
   gghighlight(receiver_player_id == "00-0036900",
               label_key = receiver_player_name,
               use_direct_label = FALSE,
               unhighlighted_params = list(linewidth = 0.5)) +
-  geom_point(data = framewr7,
+  geom_point(data = framewr8,
              aes(color = "#FF5C00"),
              size = 2.5) +
-  geom_text_repel(box.padding = 0.4,
-                  data = framewr7,
-                  aes(label = cumrec,
+  geom_text_repel(box.padding = 0.9,
+                  data = framewr8,
+                  aes(label = cumtd,
                       color = "#FF5C00",
                       family = "Tw Cen MT Condensed Extra Bold"),
                   segment.color = NA,
-                  size = 8.5) +
-  scale_y_continuous(breaks = c(0, 30, 60, 90, 120)) +
+                  size = 9.0) +
   scale_color_identity() +
+  scale_y_continuous(breaks = c(0, 4, 8, 12, 16)) +
   coord_cartesian(clip = "off") +
   annotation_custom(cinLogo,
-                    x = 4920, y = 134,
-                    xmax = 5650, ymax = 149) +
-  labs(title = "Ja'Marr Chase Triple Crown - Receptions",
+                    x = 16.73, y = 18.03,
+                    xmax = 19.75, ymax = 19.97) +
+  labs(title = "Ja'Marr Chase Triple Crown - Receiving TDs",
        subtitle = "2024 NFL Regular Season",
        caption = "By Nick Gasperi | @tbanalysis | Data @nflfastR",
-       y = "Receptions") +
+       x = "Week", y = "Receiving Touchdowns") +
   dark_theme_gray() +
   theme(legend.position = "none",
         plot.background = element_rect(fill = "grey10"),
@@ -93,8 +97,8 @@ wrplot7 = ggplot(data = wrdata7, aes(x = play_id, y = cumrec, group = receiver_p
   theme(text = element_text(family = "Tw Cen MT Condensed Extra Bold"))
 
 # view plot
-wrplot7
-  
+wrplot8
+
 # save plot
-ggsave("X Post 57 - chase_TC_receptions.png",
+ggsave("X Post 58 - chase_TC_tds.png",
        width = 10.5, height = 7, dpi = "retina")
