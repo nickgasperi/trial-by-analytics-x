@@ -66,9 +66,9 @@ wasplot1 = data454 %>%
         axis.title = element_text(face = "bold", size = 15),
         axis.text = element_text(size = 15))
 
-# view  plot
+# view plot
 wasplot1
 
-# save  plot
+# save plot to local files
 ggsave("X post 15 - wasfirstandsecond.png",
        width = 14, height = 10, dpi = "retina")

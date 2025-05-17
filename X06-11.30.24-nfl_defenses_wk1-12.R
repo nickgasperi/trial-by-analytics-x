@@ -1,10 +1,10 @@
 ## load packages
-  library("tidyverse")
-  library("nflplotR")
-  library("nflfastR")
-  library("nflreadr")
-  library("ggrepel")
-  library("gt")
+  library(tidyverse)
+  library(nflplotR)
+  library(nflfastR)
+  library(nflreadr)
+  library(ggrepel)
+  library(gt)
 
 ## load 2024 NFL data
   pbpall = load_pbp(2024)

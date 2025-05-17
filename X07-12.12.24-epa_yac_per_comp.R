@@ -1,6 +1,5 @@
 # load packages
 library(tidyverse)
-library(dplyr)
 library(nflfastR)
 library(nflplotR)
 library(nflreadr)
@@ -46,5 +45,7 @@ plotqbdata = ggplot(data = qbdata, aes(x = yac, y = epa, )) +
 # view the plot
 plotqbdata
 
-# export the plot
-ggsave("X Post 7 - YAC and EPA.png", width = 14, height = 10, dpi = "retina")
+# save plot to local files
+ggsave("X Post 7 - YAC and EPA.png",
+       width = 14, height = 10,
+       dpi = "retina")

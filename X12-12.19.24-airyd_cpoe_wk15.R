@@ -58,6 +58,6 @@ wk15passplot = ggplot(data = datawk15, aes(x = airyd, y = cpoe)) +
 # view plot
 wk15passplot
 
-# save plot
+# save plot to local files
 ggsave("X post 12 - airyd_cpoe_wk15.png",
        width = 14, height = 10, dpi = "retina")

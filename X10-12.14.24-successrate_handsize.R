@@ -1,6 +1,5 @@
 # load packages
 library(tidyverse)
-library(dplyr)
 library(ggplot2)
 library(nflfastR)
 library(nflplotR)
@@ -89,9 +88,9 @@ hsizeplot = ggplot(data = hsizedata, aes(x = sucrate, y = handsize)) +
         axis.text = element_text(size = 13),
         plot.caption = element_text(size = 12))
 
-# view the plot
+# view plot
 hsizeplot
 
-# save the plot
+# save plot to local files
 ggsave("X post 10 - successrate_handsize.png",
        width = 14, height = 10, dpi = "retina")

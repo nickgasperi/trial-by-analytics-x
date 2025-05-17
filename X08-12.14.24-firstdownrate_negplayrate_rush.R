@@ -1,6 +1,5 @@
 # load packages
 library(tidyverse)
-library(dplyr)
 library(ggplot2)
 library(nflfastR)
 library(nflplotR)
@@ -75,7 +74,7 @@ plotrb = ggplot(data = rbdata, aes(x = fdrushrt, y = negrushrt)) +
 # view the plot
 plotrb
 
-# save the plot
+# save plot to local files
 ggsave("X post 8 - Fdown Rate and NegPlay Rate.png",
        width = 14, height = 10, dpi = "retina")
 

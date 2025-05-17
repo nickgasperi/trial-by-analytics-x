@@ -1,5 +1,5 @@
 # load packages
-library(tidyverse)  # data wrangling
+library(tidyverse)
 library(nflfastR)
 library(nflplotR)
 library(nflreadr)
@@ -49,9 +49,9 @@ plotepa = ggplot(data = epadata, aes(x = play_id, y = cumepa)) +      # use play
         axis.text = element_text(size = 15),
         legend.position = "none")
 
-# view the plot
+# view plot
 plotepa
 
-# save the plot to device's local files
+# save plot to local files
 ggsave("X post 16 - epa_mvprace.png",
        width = 14, height = 10, dpi = "retina")

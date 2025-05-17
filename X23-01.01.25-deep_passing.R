@@ -1,9 +1,9 @@
 # load packages
-library(tidyverse)      # data wrangling
+library(tidyverse) 
 library(nflfastR)
 library(nflplotR)
 library(nflreadr)
-library(ggrepel)        # replaces geom_text
+library(ggrepel)        
 
 # load NFL data from 2024 season
 nfldata = load_pbp(2024)
@@ -70,6 +70,6 @@ deepplot1 = ggplot(data = deepdata1, aes(x = cpoe, y = epa)) +
 # view plot
 deepplot1
 
-# save plot
+# save plot to local files
 ggsave("X post 23 - deep_passes.png",
        width = 10.5, height = 7, dpi = "retina")
