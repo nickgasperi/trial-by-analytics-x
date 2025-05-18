@@ -10,16 +10,16 @@ pbp24 = load_pbp(2024)
 
 # wrangle data into new tibble
 wk11_24_pass_air_epa = pbp24 %>%
-  filter(week == 11,
+  filter(week == 11,                        # include only passes from week 11
           play_type == "pass",
-          !is.na(air_yards)) %>%            # include only passes from week 11   
+          !is.na(air_yards)) %>%   
   group_by(id, name) %>%
   summarize(team = last(posteam),
             att = n(),
             ydair = mean(air_yards),
             epa = mean(epa)) %>%
   filter(att > 15) %>%                      # include only players with more than 15 pass attempts
-  arrange(epa) %>%                          # use arrange to sort tibble
+  arrange(epa) %>%                          # sort tibble by avg. EPA
   print(n = Inf)                            # print all rows
 
 # plot week 11 QB performance
@@ -29,19 +29,24 @@ plot221 = ggplot(data = wk11_24_pass_air_epa,
        subtitle = "Aggressiveness vs. Effectiveness",
        x = "Air Yards Per Attempt",
        y = "EPA Per Attempt") +
-  geom_text_repel(aes(label = wk11_24_pass_air_epa$name)) +         # replaces geom_text
-  geom_nfl_logos(aes(team_abbr = team), width = .05)+               # add player team logo to data points
-  geom_hline(yintercept = mean(wk11_24_pass_air_epa$epa),
-             linetype = "dashed") +                                 # plot avg epa
-  geom_vline(xintercept = mean(wk11_24_pass_air_epa$ydair),
-             linetype = "dashed") +                                 # plot avg air yards
+  geom_text_repel(aes(label = wk11_24_pass_air_epa$name)) +      # replaces geom_text
+  geom_nfl_logos(aes(team_abbr = team),                          # replace data points with team logos
+                 width = .05) +
+  geom_hline(yintercept = mean(wk11_24_pass_air_epa$epa),       # plot avg EPA
+             linetype = "dashed") +                             
+  geom_vline(xintercept = mean(wk11_24_pass_air_epa$ydair),     # plot avg air yards
+             linetype = "dashed") +                             
   theme_bw() +
-  theme(plot.title = element_text(face="bold", hjust = 0.5, size = 17),
-        plot.subtitle = element_text(hjust = 0.5, size = 12))
+  theme(plot.title = element_text(face = "bold",
+                                  hjust = 0.5,
+                                  size = 17),
+        plot.subtitle = element_text(hjust = 0.5,
+                                     size = 12))
 
 # view plot
 plot221
 
-# save plot to files
+# save plot to local files
 ggsave("X post 1 - wk11_passing.png",
-       width = 14, height = 10, dpi = "retina")
+       width = 14, height = 10,
+       dpi = "retina")

@@ -1,11 +1,11 @@
 # load packages
-library(ggplot2)
-library(ggrepel)
-library(nflreadr)
+library(tidyverse)   # data wrangling
+library(ggrepel)     # replaces geom_text()
 library(nflfastR)
+library(nflreadr)
 library(nflplotR)
 
-# load data
+# load 2024 NFL data
 data1 = load_pbp(2024)
 
 # before filtering, define group of players to include J.Daniels; C.Williams; D.Maye; B.Nix
