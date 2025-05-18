@@ -54,4 +54,4 @@ plotqbepa1
 # save plot to local files
 ggsave("X Post 3 - EPA Per Attempt.png",
        width = 14, height = 10,
-       spi = "retina")
+       dpi = "retina")
