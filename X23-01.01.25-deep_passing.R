@@ -1,9 +1,9 @@
 # load packages
-library(tidyverse) 
-library(nflfastR)
-library(nflplotR)
-library(nflreadr)
+library(tidyverse)
 library(ggrepel)        
+library(nflfastR)
+library(nflreadr)
+library(nflplotR)
 
 # load NFL data from 2024 season
 nfldata = load_pbp(2024)
@@ -47,12 +47,23 @@ passing55 = deepdata1 %>%
   print(n = Inf)
 
 # plot data
-deepplot1 = ggplot(data = deepdata1, aes(x = cpoe, y = epa)) +
-  geom_hline(yintercept = mean(passing55$epa), linetype = "dashed", color = "red") +
-  geom_vline(xintercept = mean(passing55$cpoe), linetype = "dashed", color = "red") +
-  geom_smooth(method = "lm", se = FALSE, color = "grey") +
-  geom_point(aes(color = posteam, size = longatt, alpha = 0.75)) +
-  geom_text_repel(aes(label = passer_player_name, fontface = "bold", color = posteam)) +
+deepplot1 = ggplot(data = deepdata1,
+                   aes(x = cpoe, y = epa)) +
+  geom_hline(yintercept = mean(passing55$epa),
+             linetype = "dashed",
+             color = "red") +
+  geom_vline(xintercept = mean(passing55$cpoe),
+             linetype = "dashed",
+             color = "red") +
+  geom_smooth(method = "lm",
+              se = FALSE,
+              color = "grey") +
+  geom_point(aes(color = posteam,
+                 size = longatt,
+                 alpha = 0.75)) +
+  geom_text_repel(aes(label = passer_player_name,
+                      fontface = "bold",
+                      color = posteam)) +
   scale_color_nfl(type = "primary") +
   labs(title = "CPOE vs. EPA Per Pass Attempt | 20+ Air Yards",
        subtitle = "2024 NFL Wk 1-17 (min. 25 att.)",
@@ -61,10 +72,15 @@ deepplot1 = ggplot(data = deepdata1, aes(x = cpoe, y = epa)) +
   theme_minimal() +
   theme(legend.position = "none",
         plot.background = element_rect(fill = "#F0F0F0"),
-        plot.title = element_text(hjust = 0.5, face = "bold", size = 19),
-        plot.subtitle = element_text(hjust = 0.5, face = "bold", size = 17),
+        plot.title = element_text(hjust = 0.5,
+                                  face = "bold",
+                                  size = 19),
+        plot.subtitle = element_text(hjust = 0.5,
+                                     face = "bold",
+                                     size = 17),
         plot.caption = element_text(size = 10),
-        axis.title = element_text(face = "bold.italic", size = 13),
+        axis.title = element_text(face = "bold.italic",
+                                  size = 13),
         axis.text = element_text(size = 13))
 
 # view plot
@@ -72,4 +88,5 @@ deepplot1
 
 # save plot to local files
 ggsave("X post 23 - deep_passes.png",
-       width = 10.5, height = 7, dpi = "retina")
+       width = 10.5, height = 7,
+       dpi = "retina")
