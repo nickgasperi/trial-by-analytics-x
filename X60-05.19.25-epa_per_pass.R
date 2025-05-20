@@ -37,7 +37,7 @@ avgepaplot = ggplot(data = totalepa,
   scale_color_nfl(type = "secondary") +                # apply secondary team colors to columns
   scale_fill_nfl(alpha = 0.8) +                        # fill column with primary team color
   labs(title = "EPA Per Pass Attempt - Top 10",
-       subtitle = "2024 NFL Regular Season | min. 200 att.",
+       subtitle = "2024 NFL Regular Season | min. 250 att.",
        y = "EPA/Pass Att.",
        caption = "By Nick Gasperi | @tbanalysis | data @nflfastR") +
   theme_minimal() +
