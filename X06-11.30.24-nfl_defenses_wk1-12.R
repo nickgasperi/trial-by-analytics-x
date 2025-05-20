@@ -1,6 +1,6 @@
 # load packages
-library(tidyverse)   # data wrangling
-library(ggrepel)     # replaces geom_text()
+library(tidyverse)
+library(ggrepel)
 library(nflfastR)
 library(nflreadr)
 library(nflplotR)
@@ -176,8 +176,7 @@ plot_rpyd_2412 = ggplot(data = pbp2412_rp,
 # view plot
 plot_rpyd_2412
 
-# export the plot
-# use the Files tab in the bottom right pane of RStudio to open and save image to desired file location
+# save plot to local files
 ggsave("X Post 6 pt2 - yds allowed wk1-12.png",
        width = 14, height = 10,
        dpi = "retina")

@@ -1,8 +1,8 @@
 # load packages
-library(tidyverse)  # data wrangling
+library(tidyverse)
 library(nflfastR)
-library(nflplotR)
 library(nflreadr)
+library(nflplotR)
 
 # load NFL data from 2024 season
 nfldata2 = load_pbp(2024)
@@ -31,11 +31,15 @@ frame4 = epadata2 %>%
   print(n = Inf)
 
 # create cumulative EPA plot for top 4 rookie QBs
-plotepa2 = ggplot(data = epadata2, aes(x = play_id, y = cumepa)) +
-  geom_hline(yintercept = 0, linetype = "dashed", color = "grey") +
+plotepa2 = ggplot(data = epadata2,
+                  aes(x = play_id, y = cumepa)) +
+  geom_hline(yintercept = 0,
+             linetype = "dashed",
+             color = "grey") +
   geom_line(aes(color = name)) +
   scale_color_manual(values = c("orange", "navy", "blue", "red")) +
-  geom_nfl_headshots(data = frame4, aes(player_gsis = id),
+  geom_nfl_headshots(data = frame4,
+                     aes(player_gsis = id),
                      height = 0.10) +
   labs(title = "Rookie QBs - Cumulative EPA",
        subtitle = "2024 NFL Wk 1-15 | Passing and Rushing Plays",
@@ -44,17 +48,23 @@ plotepa2 = ggplot(data = epadata2, aes(x = play_id, y = cumepa)) +
        y = "Cumulative EPA") +
   theme_minimal() +
   theme(plot.background = element_rect(fill = "#F0F0F0"),
-        axis.text.x = element_blank(),
-        plot.title = element_text(hjust = 0.5, face = "bold", size = 22),
-        plot.subtitle = element_text(hjust = 0.5, face = "bold", size = 20),
+        legend.position = "none",
+        plot.title = element_text(hjust = 0.5,
+                                  face = "bold",
+                                  size = 22),
+        plot.subtitle = element_text(hjust = 0.5,
+                                     face = "bold",
+                                     size = 20),
         plot.caption = element_text(size = 13),
-        axis.title = element_text(face = "bold", size = 15),
-        axis.text = element_text(size = 15),
-        legend.position = "none")
+        axis.title = element_text(face = "bold",
+                                  size = 15),
+        axis.text.y = element_text(size = 15),
+        axis.text.x = element_blank())
 
 # view the plot
 plotepa2
 
-# save the plot to the device's local files
+# save plot to local files
 ggsave("X post 16.2 - epa_royrace.png",
-       width = 14, height = 10, dpi = "retina")
+       width = 14, height = 10,
+       dpi = "retina")
