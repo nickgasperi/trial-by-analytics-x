@@ -1,9 +1,9 @@
 # load packages
 library(tidyverse)
-library(nflfastR)
-library(nflplotR)
-library(nflreadr)
 library(ggrepel)
+library(nflfastR)
+library(nflreadr)
+library(nflplotR)
 
 # load 2024 data
 data1 = load_pbp(2024)
@@ -26,19 +26,36 @@ qbdata = data1 %>%
   print(n = Inf)
 
 # plot the data
-plotqbdata = ggplot(data = qbdata, aes(x = yac, y = epa, )) +
-  geom_hline(yintercept = mean(qbdata$epa), linetype = "dashed", color = "red") +
-  geom_vline(xintercept = mean(qbdata$yac), linetype = "dashed", color = "red") +
-  geom_smooth(method = "lm", se = FALSE, color = "grey") +
-  geom_nfl_logos(aes(team_abbr = posteam), width = 0.045, alpha = 0.8) +
-  geom_text_repel(box.padding = 0.8, aes(label = qbdata$passer_player_name)) +
-  labs(title = "Average YAC and EPA Per Completion", subtitle = "2024 NFL Weeks 1-14 (min. 100 att.)",
-       x = "YAC", y = "EPA",
+plotqbdata = ggplot(data = qbdata,
+                    aes(x = yac, y = epa, )) +
+  geom_hline(yintercept = mean(qbdata$epa),
+             linetype = "dashed",
+             color = "red") 
+  geom_vline(xintercept = mean(qbdata$yac),
+             linetype = "dashed",
+             color = "red") +
+  geom_smooth(method = "lm",
+              se = FALSE,
+              color = "grey") +
+  geom_nfl_logos(aes(team_abbr = posteam),
+                 width = 0.045,
+                 alpha = 0.8) +
+  geom_text_repel(box.padding = 0.8,
+                  aes(label = qbdata$passer_player_name)) +
+  labs(title = "Average YAC and EPA Per Completion",
+       subtitle = "2024 NFL Weeks 1-14 (min. 100 att.)",
+       x = "YAC",
+       y = "EPA",
        caption = "By Nick Gasperi | @tbanalysis | Data @nflfastR") +
   theme_bw() +
-  theme(plot.title = element_text(hjust = 0.5, face = "bold", size = 17),
-        plot.subtitle = element_text(hjust = 0.5, face = "bold", size = 15),
-        axis.title = element_text(face = "bold.italic", size = 13),
+  theme(plot.title = element_text(hjust = 0.5,
+                                  face = "bold",
+                                  size = 17),
+        plot.subtitle = element_text(hjust = 0.5,
+                                     face = "bold",
+                                     size = 15),
+        axis.title = element_text(face = "bold.italic",
+                                  size = 13),
         axis.text = element_text(size = 10),
         plot.caption = element_text(size = 10))
 

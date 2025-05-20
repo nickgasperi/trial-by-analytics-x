@@ -1,10 +1,9 @@
 # load packages
 library(tidyverse)
-library(ggplot2)
-library(nflfastR)
-library(nflplotR)
-library(nflreadr)
 library(ggrepel)
+library(nflfastR)
+library(nflreadr)
+library(nflplotR)
 
 # create hand size tibble
 handsize2024 = tibble(
@@ -27,7 +26,7 @@ handsize2024 = tibble(
                10.5, 10.625, 9.375, 9.125, 10.125,
                9.125))
 
-# load data
+# load 2024 NFL data
 data93 = load_pbp(2024)
 
 # filter data to only passing plays
@@ -60,31 +59,53 @@ hsizedata %>%
 cor.test(hsizedata$sucrate, hsizedata$handsize)
 
 # create plot
-hsizeplot = ggplot(data = hsizedata, aes(x = sucrate, y = handsize)) +
+hsizeplot = ggplot(data = hsizedata,
+                   aes(x = sucrate, y = handsize)) +
   geom_nfl_logos(aes(team_abbr = posteam,
-                     width = 0.04, alpha = .99)) +
-  geom_text_repel(box.padding = 0.3, aes(label = passer_player_name)) +
+                     width = 0.04,
+                     alpha = .99)) +
+  geom_text_repel(box.padding = 0.3,
+                  aes(label = passer_player_name)) +
   geom_hline(yintercept = mean(hsizedata$handsize),
-             linetype = "dashed", color = "red") +
+             linetype = "dashed",
+             color = "red") +
   geom_vline(xintercept = mean(hsizedata$sucrate),
-             linetype = "dashed", color = "red") +
+             linetype = "dashed",
+             color = "red") +
   labs(title = "NFL QB Success Rate vs. Hand Size",
        subtitle = "2024 Weeks 1-14 | Passing Plays (min. 200 att.)",
        x = "Success Rate (%)",
        y = "Hand Size (in.)",
        caption = "By Nick Gasperi | @tbanalysis | Data @nflfastR") +
-  annotate("text", label = "Hang In There", x= 0.39, y = 9.3,
-           size = 7, color = "red", fontface = "italic") +
-  annotate("text", label = "Firm Handshake", x = 0.39, y = 10.3,
-           size = 6, color = "red", fontface = "italic", alpha = 0.65) +
-  annotate("text", label = "Congrats", x = 0.53, y = 10.25,
-           size = 7, color = "green", fontface = "italic") +
-  annotate("text", label = "Happy For You", x = 0.55, y = 9.12,
-           size = 6, color = "green", fontface = "italic", alpha = 0.65) +
+  annotate("text",
+           label = "Hang In There",
+           x = 0.39, y = 9.3,
+           size = 7, color = "red",
+           fontface = "italic") +
+  annotate("text",
+           label = "Firm Handshake",
+           x = 0.39, y = 10.3,
+           size = 6, color = "red",
+           fontface = "italic",
+           alpha = 0.65) +
+  annotate("text", label = "Congrats",
+           x = 0.53, y = 10.25,
+           size = 7, color = "green",
+           fontface = "italic") +
+  annotate("text", label = "Happy For You",
+           x = 0.55, y = 9.12,
+           size = 6, color = "green",
+           fontface = "italic",
+           alpha = 0.65) +
   theme_bw() +
-  theme(plot.title = element_text(hjust = 0.5, face = "bold", size = 22),
-        plot.subtitle = element_text(hjust = 0.5, face = "bold", size = 18),
-        axis.title = element_text(face = "bold.italic", size = 16),
+  theme(plot.title = element_text(hjust = 0.5,
+                                  face = "bold",
+                                  size = 22),
+        plot.subtitle = element_text(hjust = 0.5,
+                                     face = "bold",
+                                     size = 18),
+        axis.title = element_text(face = "bold.italic",
+                                  size = 16),
         axis.text = element_text(size = 13),
         plot.caption = element_text(size = 12))
 
@@ -93,4 +114,5 @@ hsizeplot
 
 # save plot to local files
 ggsave("X post 10 - successrate_handsize.png",
-       width = 14, height = 10, dpi = "retina")
+       width = 14, height = 10,
+       dpi = "retina")
