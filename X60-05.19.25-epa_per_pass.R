@@ -20,9 +20,9 @@ totalepa = nfldata %>%
   summarize(att = n(),
             epa = sum(epa)/sum(att),
             .groups = "drop") %>%
-  filter(epa <= -0.06,          # filter by epa/attempt to get bottom 10
-         att >= 250) %>%         # players with at least 250 pass attempts
-  arrange(epa) %>%
+  filter(epa >= 0.120,              # filter by epa/attempt to get top 10
+         att >= 250) %>%            # players with at least 250 pass attempts
+  arrange(-epa) %>%
   print(n = Inf)
 
 # plot epa per pass attempt
@@ -35,8 +35,8 @@ avgepaplot = ggplot(data = totalepa,
   geom_nfl_logos(aes(team_abbr = posteam),
                  width = 0.06) +
   scale_color_nfl(type = "secondary") +                # apply secondary team colors to columns
-  scale_fill_nfl(alpha = 0.8) +                     # fill column with primary team color
-  labs(title = "EPA Per Pass Attempt - Bottom 10",
+  scale_fill_nfl(alpha = 0.8) +                        # fill column with primary team color
+  labs(title = "EPA Per Pass Attempt - Top 10",
        subtitle = "2024 NFL Regular Season | min. 200 att.",
        y = "EPA/Pass Att.",
        caption = "By Nick Gasperi | @tbanalysis | data @nflfastR") +
@@ -59,6 +59,6 @@ avgepaplot = ggplot(data = totalepa,
 avgepaplot
 
 # save plot to local files
-ggsave("X post 59 - epa_per_pass.png",
+ggsave("X post 60 - epa_per_pass.png",
        width = 10.5, height = 7,
        dpi = "retina")

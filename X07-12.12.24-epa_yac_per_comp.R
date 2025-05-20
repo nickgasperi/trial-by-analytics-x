@@ -5,7 +5,7 @@ library(nflfastR)
 library(nflreadr)
 library(nflplotR)
 
-# load 2024 data
+# load 2024 NFL data
 data1 = load_pbp(2024)
 
 # filter data
