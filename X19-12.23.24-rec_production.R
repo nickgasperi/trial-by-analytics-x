@@ -1,9 +1,9 @@
 # load packages
-library(tidyverse)    # data wrangling
+library(tidyverse)
+library(ggrepel)
 library(nflfastR)
-library(nflplotR)
 library(nflreadr)
-library(ggrepel)      # replaces geom_text
+library(nflplotR)
 
 # load NFL data from 2024 season
 nfldata = load_pbp(2024)
@@ -15,7 +15,8 @@ wrset = nfldata %>%
   filter(!is.na(receiver_player_id),
          !is.na(air_yards)) %>%
   mutate(yards_after_catch = ifelse(is.na(yards_after_catch), 0, yards_after_catch)) %>%
-  group_by(receiver_player_id, receiver_player_name,
+  group_by(receiver_player_id,
+           receiver_player_name,
            posteam) %>%
   summarize(targets = n(),
             yac = sum(yards_after_catch)/sum(targets),
@@ -24,10 +25,17 @@ wrset = nfldata %>%
   print(n = Inf)
 
 # plot the data
-wrplot1 = ggplot(data = wrset, aes(x = yac, y = yds)) +
-  geom_hline(yintercept = mean(wrset$yds), linetype = "dashed", color = "black") +
-  geom_vline(xintercept = mean(wrset$yac), linetype = "dashed", color = "black") +
-  geom_smooth(method = "lm", se = FALSE, color = "grey") +
+wrplot1 = ggplot(data = wrset,
+                 aes(x = yac, y = yds)) +
+  geom_hline(yintercept = mean(wrset$yds),
+             linetype = "dashed",
+             color = "black") +
+  geom_vline(xintercept = mean(wrset$yac),
+             linetype = "dashed",
+             color = "black") +
+  geom_smooth(method = "lm",       # add trend line
+              se = FALSE,
+              color = "grey") +
   geom_point(aes(color = posteam)) +
   scale_color_nfl(type = "primary") +
   geom_text_repel(aes(label = receiver_player_name, size = 8)) +
@@ -38,15 +46,21 @@ wrplot1 = ggplot(data = wrset, aes(x = yac, y = yds)) +
        y = "Total Yards") +
   theme_bw() +
   theme(legend.position = "none",
-        plot.title = element_text(hjust = 0.5, face = "bold", size = 22),
-        plot.subtitle = element_text(hjust = 0.5, face = "bold", size = 20),
+        plot.title = element_text(hjust = 0.5,
+                                  face = "bold",
+                                  size = 22),
+        plot.subtitle = element_text(hjust = 0.5,
+                                     face = "bold",
+                                     size = 20),
         plot.caption = element_text(size = 13),
-        axis.title = element_text(face = "bold.italic", size = 15),
+        axis.title = element_text(face = "bold.italic",
+                                  size = 15),
         axis.text = element_text(size = 15))
 
-# view the plot
+# view plot
 wrplot1
 
-# save the plot
+# save plot to local files
 ggsave("X post 19 - rec_production.png",
-       width = 14, height = 10, dpi = "retina")  
+       width = 14, height = 10,
+       dpi = "retina")  
