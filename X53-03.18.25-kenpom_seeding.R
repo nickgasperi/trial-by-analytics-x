@@ -1,6 +1,6 @@
-library(tidyverse)        # data wrangling
-library(readxl)           # to import data
-library(PerformanceAnalytics)     # to plot relationships among variables
+library(tidyverse)
+library(readxl)
+library(PerformanceAnalytics)
 
 # convert 2025 NCAA CBB dataframe to tibble
 kenpom2 = as_tibble(kenpom1)
@@ -11,8 +11,19 @@ kenpom2
 # define numeric variables
 kenpomNUM = kenpom2 %>%
   filter(!is.na(Seed)) %>%    # include only tournament teams
-  select(Rk, Seed, Wins, Losses, NetRtg, ORtg, DRtg, AdjT, Luck,
-         `opp-NetRtg`, `opp-ORtg`, `opp-DRtg`, `noncon-NetRtg`)
+  select(Rk,
+         Seed,
+         Wins,
+         Losses,
+         NetRtg,
+         ORtg,
+         DRtg,
+         AdjT,
+         Luck,
+         `opp-NetRtg`,
+         `opp-ORtg`,
+         `opp-DRtg`,
+         `noncon-NetRtg`)
 
 # plot correlation chart
 corplot1 = chart.Correlation(kenpomNUM,

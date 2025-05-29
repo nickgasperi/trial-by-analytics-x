@@ -25,7 +25,10 @@ nfldata = load_pbp(2024)
 wrdata7 = nfldata %>%
   filter(week < 19,
          !is.na(receiver_player_id)) %>%
-  group_by(play_id, receiver_player_id, receiver_player_name, posteam) %>%
+  group_by(play_id,
+           receiver_player_id,
+           receiver_player_name,
+           posteam) %>%
   summarize(tgt = n(),
             rec = complete_pass,
             .groups = "drop")
@@ -41,7 +44,9 @@ framewr7 = wrdata7 %>%
 
 # plot data
 # use gghighlight to emphasize J.Chase data point
-wrplot7 = ggplot(data = wrdata7, aes(x = play_id, y = cumrec, group = receiver_player_id)) +
+wrplot7 = ggplot(data = wrdata7,
+                 aes(x = play_id, y = cumrec,
+                     group = receiver_player_id)) +
   geom_line(aes(color = "#FF5C00"),
             linewidth = 1.0) +
   gghighlight(receiver_player_id == "00-0036900",
@@ -97,4 +102,5 @@ wrplot7
   
 # save plot
 ggsave("X Post 57 - chase_TC_receptions.png",
-       width = 10.5, height = 7, dpi = "retina")
+       width = 10.5, height = 7,
+       dpi = "retina")

@@ -1,7 +1,7 @@
 # load packages
-library(tidyverse)    # data wrangling
-library(readxl)       # to import data
-library(ggrepel)      # replaces geom_text
+library(tidyverse)
+library(readxl)
+library(ggrepel)
 
 # plot data
 champsplot1 = kenbart1 %>%
@@ -13,7 +13,8 @@ champsplot1 = kenbart1 %>%
              linetype = "dashed") +
   geom_vline(xintercept = mean(`3PT%`),
              linetype = "dashed") +
-  geom_smooth(method = "lm", se = FALSE,
+  geom_smooth(method = "lm",
+              se = FALSE,
               color = "red") +
   geom_point(aes(color = color1,
                  size = size1)) +
@@ -26,19 +27,26 @@ champsplot1 = kenbart1 %>%
   labs(title = "NCAA National Champions - 3PT % vs. FT %",
        subtitle = "2008-2025 Tournaments",
        caption = "By Nick Gasperi | @tbanalysis | Data @nishaanamin",
-       x = "3PT %", y = "Free Throw %") +
+       x = "3PT %",
+       y = "Free Throw %") +
   theme_minimal() +
   theme(legend.position = "none",
         plot.background = element_rect(fill = "#F0F0F0"),
-        plot.title = element_text(hjust = 0.5, size = 21, face = "bold"),
-        plot.subtitle = element_text(hjust = 0.5, size = 18, face = "bold"),
+        plot.title = element_text(hjust = 0.5,
+                                  size = 21,
+                                  face = "bold"),
+        plot.subtitle = element_text(hjust = 0.5,
+                                     size = 18,
+                                     face = "bold"),
         plot.caption = element_text(size = 11),
-        axis.title = element_text(size = 15, face = "bold"),
+        axis.title = element_text(size = 15,
+                                  face = "bold"),
         axis.text = element_text(size = 15))
 
 # view the plot
 champsplot1
 
-# save the plot to the device's local files
+# save the plot to local files
 ggsave("NCAA Champs - 3Pt v. FT.png",
-       width = 14, height = 10, dpi = "retina")  
+       width = 14, height = 10,
+       dpi = "retina")  

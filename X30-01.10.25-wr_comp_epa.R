@@ -28,7 +28,7 @@ wrdata1 = data3 %>%
 tail(wrdata1, 10)
 
 # add columns for cumulative yards, epa, and targets
-wrdata1$cumyds = ave(wrdata1$yards, wrdata1$receiver_player_id,FUN = cumsum)
+wrdata1$cumyds = ave(wrdata1$yards, wrdata1$receiver_player_id, FUN = cumsum)
 wrdata1$cumepa = ave(wrdata1$epa, wrdata1$receiver_player_id, FUN = cumsum)
 wrdata1$cumtgts = ave(wrdata1$targets, wrdata1$receiver_player_id, FUN = cumsum)
 

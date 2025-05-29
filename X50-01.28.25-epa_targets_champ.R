@@ -14,7 +14,9 @@ champdatarec = nfldata %>%
          !is.na(epa),
          !is.na(air_yards),
          !is.na(receiver_player_id)) %>%
-  group_by(receiver_player_id, receiver_player_name, posteam) %>%
+  group_by(receiver_player_id,
+           receiver_player_name,
+           posteam) %>%
   summarize(targets = n(),
             epaper = sum(epa)/sum(targets),
             recyd = sum(yards_gained)) %>%
@@ -23,19 +25,27 @@ champdatarec = nfldata %>%
   print(n = Inf)
 
 # plot data
-champplotrec = ggplot(data = champdatarec, aes(x = targets, epaper)) +
+champplotrec = ggplot(data = champdatarec,
+                      aes(x = targets, epaper)) +
   geom_hline(yintercept = mean(champdatarec$epaper),
-             linetype = "dashed", color = "grey30") +
+             linetype = "dashed",
+             color = "grey30") +
   geom_hline(yintercept = 0,
-             color = "chartreuse", alpha = 0.7) +
+             color = "chartreuse",
+             alpha = 0.7) +
   geom_vline(xintercept = mean(champdatarec$targets),
-             linetype = "dashed", color = "grey30") +
-  geom_smooth(method = "lm", se = FALSE, color = "grey") +
+             linetype = "dashed",
+             color = "grey30") +
+  geom_smooth(method = "lm",
+              se = FALSE,
+              color = "grey") +
   geom_nfl_logos(aes(team_abbr = posteam),
-                 width = 0.06, alpha = 0.8) +
+                 width = 0.06,
+                 alpha = 0.8) +
   geom_text_repel(box.padding = 0.8,
                   aes(label = receiver_player_name,
-                      color = posteam, fontface = "bold")) +
+                      color = posteam,
+                      fontface = "bold")) +
   scale_color_nfl(type = "primary") +
   labs(title = "Volume vs. Efficiency of Targets",
        subtitle = "2024 AFC/NFC Championships | min. 3 targets",
@@ -44,16 +54,20 @@ champplotrec = ggplot(data = champdatarec, aes(x = targets, epaper)) +
   theme_minimal() +
   theme(plot.background = element_rect(fill = "#F0F0F0"),
         plot.title = element_text(hjust = 0.5,
-                                  face = "bold", size = 18),
+                                  face = "bold",
+                                  size = 18),
         plot.subtitle = element_text(hjust = 0.5,
-                                     face = "bold", size = 16),
+                                     face = "bold",
+                                     size = 16),
         plot.caption = element_text(size = 11),
-        axis.title = element_text(face = "bold", size = 15),
+        axis.title = element_text(face = "bold",
+                                  size = 15),
         axis.text = element_text(size = 15))
       
 # view plot
 champplotrec
 
-# save plot to device's local files
+# save plot to local files
 ggsave("X post 50 - epa_targets_champ_wknd.png",
-       width = 10.5, height = 7, dpi = "retina")
+       width = 10.5, height = 7,
+       dpi = "retina")

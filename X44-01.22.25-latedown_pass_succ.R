@@ -13,7 +13,8 @@ latedown = nfldata %>%
   filter(week == 20,
          play_type == "run" | play_type == "pass",
          down == 3 | down == 4,
-         qb_spike == 0, qb_kneel == 0,
+         qb_spike == 0,
+         qb_kneel == 0,
          !is.na(success)) %>%
   mutate(play_type = recode(play_type,
                             "run" = 0, "pass" = 1)) %>%

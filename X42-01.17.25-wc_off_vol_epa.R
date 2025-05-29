@@ -11,7 +11,8 @@ nfldata01 = load_pbp(2024)
 nflwc24 = nfldata01 %>%
   filter(week == 19,
          play_type == "pass" | play_type == "run",
-         qb_kneel == 0, qb_spike == 0,
+         qb_kneel == 0,
+         qb_spike == 0,
          !is.na(posteam),
          !is.na(epa)) %>%
   group_by(posteam) %>%
@@ -24,14 +25,15 @@ wcplot11 = ggplot(data = nflwc24,
                   aes(x = plays, y = epaper)) +
   scale_x_continuous(n.breaks = 6) +
   scale_y_continuous(n.breaks = 6) +
-  geom_smooth(method = "lm",           # add trend line
+  geom_smooth(method = "lm",
               se = FALSE,
               color = "grey") +
   geom_hline(yintercept = mean(nflwc24$epaper),
              linetype = "dashed",
              color = "red") +
   geom_vline(xintercept = mean(nflwc24$plays),
-             linetype = "dashed", color = "red") +
+             linetype = "dashed",
+             color = "red") +
   geom_nfl_logos(aes(team_abbr = posteam),
                  width = 0.075,
                  alpha = 0.8) +

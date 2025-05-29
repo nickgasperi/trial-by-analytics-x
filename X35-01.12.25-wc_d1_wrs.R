@@ -1,7 +1,5 @@
 # load packages
 library(tidyverse)
-library(dplyr)
-library(ggplot2)
 library(nflfastR)
 library(nflplotR)
 library(nflreadr)
@@ -30,13 +28,19 @@ wk19wr1 = nfldata1 %>%
 
 # plot data
 # geom_segment() replaces geom_col() - use geom_nfl_logos() instead of geom_point()
-wk19plot2 = ggplot(data = wk19wr1, aes(x = avgepa, xend = 0,
-                                       y = reorder(receiver_player_id, avgepa), yend = receiver_player_id)) +
-  geom_vline(xintercept = 0, linetype = "dashed", color = "darkgrey") +
+wk19plot2 = ggplot(data = wk19wr1, aes(x = avgepa,
+                                       xend = 0,
+                                       y = reorder(receiver_player_id, avgepa),
+                                       yend = receiver_player_id)) +
+  geom_vline(xintercept = 0,
+             linetype = "dashed",
+             color = "darkgrey") +
   scale_x_continuous(limits = c(-2, 2)) +
-  geom_segment(linewidth = 3, aes(color = posteam)) +
+  geom_segment(linewidth = 3,
+               aes(color = posteam)) +
   scale_color_nfl(type = "primary") +
-  geom_nfl_logos(aes(team_abbr = posteam), width = 0.06) +
+  geom_nfl_logos(aes(team_abbr = posteam),
+                 width = 0.06) +
   theme_minimal() +
   labs(title = "EPA Per Target",
        subtitle = "2024 NFL Wild Card Weekend - Day 1",

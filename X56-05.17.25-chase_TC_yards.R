@@ -26,7 +26,10 @@ wrdata6 = nfldata %>%
   filter(week < 19,
          !is.na(yards_gained),
          !is.na(receiver_player_id)) %>%
-  group_by(play_id, receiver_player_id, receiver_player_name, posteam) %>%
+  group_by(play_id,
+           receiver_player_id,
+           receiver_player_name,
+           posteam) %>%
   summarize(tgts = n(),
             yds = sum(yards_gained),
             .groups = "drop")
@@ -41,7 +44,9 @@ framewr6 = wrdata6 %>%
   print(n = Inf)
 
 # plot data
-wrplot6 = ggplot(data = wrdata6, aes(x = play_id, y = cumyds, group = receiver_player_id)) +
+wrplot6 = ggplot(data = wrdata6,
+                 aes(x = play_id, y = cumyds,
+                     group = receiver_player_id)) +
   geom_line(aes(color = "#FF5C00"),
             linewidth = 1.0) +
   gghighlight(receiver_player_id == "00-0036900",
@@ -62,6 +67,7 @@ wrplot6 = ggplot(data = wrdata6, aes(x = play_id, y = cumyds, group = receiver_p
   coord_cartesian(clip = "off") +
   annotation_custom(cinLogo,
                     x = 4950, y = 1795,
+                    
                     xmax = 5600, ymax = 2000) +
   labs(title = "Ja'Marr Chase Triple Crown - Receiving Yards",
        subtitle = "2024 NFL Regular Season",
@@ -96,4 +102,5 @@ wrplot6
 
 # save plot to local files
 ggsave("X Post 56 - chase_TC_yards.png",
-       width = 10.5, height = 7, dpi = "retina")
+       width = 10.5, height = 7,
+       dpi = "retina")

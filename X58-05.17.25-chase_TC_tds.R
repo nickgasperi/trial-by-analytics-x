@@ -26,7 +26,10 @@ wrdata8 = nfldata %>%
   filter(week < 19,
          play_type == "pass",
          !is.na(receiver_player_id)) %>%
-  group_by(week, receiver_player_id, receiver_player_name, posteam) %>%
+  group_by(week,
+           receiver_player_id,
+           receiver_player_name,
+           posteam) %>%
   summarize(tgt = n(),
             td = sum(touchdown == 1 &
                        td_team == posteam &
@@ -45,7 +48,9 @@ framewr8 = wrdata8 %>%
 
 # plot data
 # use gghighlight() to emphasize J.Chase data point
-wrplot8 = ggplot(data = wrdata8, aes(x = week, y = cumtd, group = receiver_player_id)) +
+wrplot8 = ggplot(data = wrdata8,
+                 aes(x = week, y = cumtd,
+                     group = receiver_player_id)) +
   geom_line(aes(color = "#FF5C00"),
             linewidth = 1.0) +
   gghighlight(receiver_player_id == "00-0036900",
@@ -71,7 +76,8 @@ wrplot8 = ggplot(data = wrdata8, aes(x = week, y = cumtd, group = receiver_playe
   labs(title = "Ja'Marr Chase Triple Crown - Receiving TDs",
        subtitle = "2024 NFL Regular Season",
        caption = "By Nick Gasperi | @tbanalysis | Data @nflfastR",
-       x = "Week", y = "Receiving Touchdowns") +
+       x = "Week",
+       y = "Receiving Touchdowns") +
   dark_theme_gray() +
   theme(legend.position = "none",
         plot.background = element_rect(fill = "grey10"),
@@ -101,4 +107,5 @@ wrplot8
 
 # save plot
 ggsave("X Post 58 - chase_TC_tds.png",
-       width = 10.5, height = 7, dpi = "retina")
+       width = 10.5, height = 7,
+       dpi = "retina")

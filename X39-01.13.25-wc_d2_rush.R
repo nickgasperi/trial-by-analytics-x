@@ -61,6 +61,7 @@ day2rushplot = ggplot(data = day2rush, aes(x = avgepa,
 # view plot
 day2rushplot
 
-# save plot
+# save plot to local files
 ggsave("X post 39 - wc_d2_rush.png",
-       width = 10.5, height = 6, dpi = "retina")
+       width = 10.5, height = 6,
+       dpi = "retina")

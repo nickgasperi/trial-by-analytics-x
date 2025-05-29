@@ -13,7 +13,8 @@ day2qbs = nfldata %>%
   filter(week == 19,
          posteam == "DEN" | posteam == "BUF" | posteam == "WAS" |
          posteam == "GB" | posteam == "PHI" | posteam == "TB",
-         play_type == "pass", qb_spike == 0,
+         play_type == "pass",
+         qb_spike == 0,
          !is.na(epa),
          !is.na(air_yards),
          !is.na(passer_player_id)) %>%
@@ -66,7 +67,7 @@ day2qbplot = ggplot(data = day2qbs,
 # view plot
 day2qbplot
 
-# save plot
+# save plot to local files
 ggsave("X post 37 - wc_d2_pass.png",
        width = 10.5, height = 6,
        dpi = "retina")
