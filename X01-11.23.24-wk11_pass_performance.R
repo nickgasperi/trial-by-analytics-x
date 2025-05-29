@@ -1,6 +1,6 @@
 # load packages
-library(tidyverse)   # data wrangling
-library(ggrepel)     # replaces geom_text
+library(tidyverse)
+library(ggrepel)
 library(nflreadr)    
 library(nflfastR)
 library(nflplotR)
@@ -9,8 +9,10 @@ library(nflplotR)
 pbp24 = load_pbp(2024)
 
 # wrangle data into new tibble
+# include only passing plays from week 11
+# 
 wk11_24_pass_air_epa = pbp24 %>%
-  filter(week == 11,                        # include only passes from week 11
+  filter(week == 11,
           play_type == "pass",
           !is.na(air_yards)) %>%   
   group_by(id, name) %>%
@@ -18,9 +20,9 @@ wk11_24_pass_air_epa = pbp24 %>%
             att = n(),
             ydair = mean(air_yards),
             epa = mean(epa)) %>%
-  filter(att > 15) %>%                      # include only players with more than 15 pass attempts
-  arrange(epa) %>%                          # sort tibble by avg. EPA
-  print(n = Inf)                            # print all rows
+  filter(att > 15) %>%
+  arrange(epa) %>%
+  print(n = Inf)
 
 # plot week 11 QB performance
 plot221 = ggplot(data = wk11_24_pass_air_epa,
@@ -29,12 +31,12 @@ plot221 = ggplot(data = wk11_24_pass_air_epa,
        subtitle = "Aggressiveness vs. Effectiveness",
        x = "Air Yards Per Attempt",
        y = "EPA Per Attempt") +
-  geom_text_repel(aes(label = wk11_24_pass_air_epa$name)) +      # replaces geom_text
-  geom_nfl_logos(aes(team_abbr = team),                          # replace data points with team logos
+  geom_text_repel(aes(label = wk11_24_pass_air_epa$name)) +
+  geom_nfl_logos(aes(team_abbr = team),                       # replace data points with team logos
                  width = .05) +
-  geom_hline(yintercept = mean(wk11_24_pass_air_epa$epa),       # plot avg EPA
+  geom_hline(yintercept = mean(wk11_24_pass_air_epa$epa),     
              linetype = "dashed") +                             
-  geom_vline(xintercept = mean(wk11_24_pass_air_epa$ydair),     # plot avg air yards
+  geom_vline(xintercept = mean(wk11_24_pass_air_epa$ydair),
              linetype = "dashed") +                             
   theme_bw() +
   theme(plot.title = element_text(face = "bold",

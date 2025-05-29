@@ -59,7 +59,7 @@ plotqbdata = ggplot(data = qbdata,
         axis.text = element_text(size = 10),
         plot.caption = element_text(size = 10))
 
-# view the plot
+# view plot
 plotqbdata
 
 # save plot to local files

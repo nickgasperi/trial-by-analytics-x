@@ -1,5 +1,5 @@
 # load packages
-library(tidyverse)   # data wrangling
+library(tidyverse)
 library(nflfastR)
 library(nflreadr)
 library(nflplotR)
@@ -9,7 +9,7 @@ data924 = load_pbp(2024)
 
 # wrangle data into new tibble 
 dataoff = data924 %>%
-  filter(week < 13,              #include passing and rushing plays from week 1 to week 12
+  filter(week < 13,
          !is.na(posteam),
          !is.na(yards_gained),
          !is.na(epa),
@@ -34,32 +34,37 @@ plotrawoff = ggplot(data = dataoff,
   geom_smooth(method = "lm",
               se = FALSE,
               color = "grey") +
-  scale_y_continuous(breaks = seq(-100, 200, by = 50)) +
+  scale_y_continuous(breaks = seq(-100, 200,by = 50)) +
   geom_nfl_logos(aes(team_abbr = posteam),
                  width = .07,
                  alpha = .8) +
   annotate("text",
-           x = 4100, y = -65,
            label = "Fake contenders?",
-           size = 5, color = "red",
+           x = 4100, y = -65,
+           size = 5,
+           color = "red",
            alpha = 0.5) +
   annotate("text",
-           x = 3450, y = -130,
            label = "Hopeless",
-           size = 5, color = "red") +
+           x = 3450, y = -130,
+           size = 5,
+           color = "red") +
   annotate("text",
-           x = 3300, y = 15,
            label = "Has potential?",
-           size = 5, color = "green",
+           x = 3300, y = 15,
+           size = 5,
+           color = "green",
            alpha = 0.5) +
   annotate("text",
-           x = 4100, y = 140,
            label = "Talented & effective",
-           size = 5 , color = "green") +
+           x = 4100, y = 140,
+           size = 5 ,
+           color = "green") +
   annotate("text",
-           x = 5050, y = 130,
            label = "Ravens",
-           size = 5, color = "purple") +
+           x = 5050, y = 130,
+           size = 5,
+           color = "purple") +
   labs(title = "Raw Offensive Production ",
        subtitle = "2024 NFL Weeks 1-12",
        x = "Offensive Yards Gained",

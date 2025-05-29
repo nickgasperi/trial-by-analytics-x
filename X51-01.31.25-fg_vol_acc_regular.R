@@ -5,7 +5,7 @@ library(nflfastR)
 library(nflreadr)
 library(nflplotR)
 
-# load NFL data from 2016-2024 seasons
+# load NFL data from '16-'24 seasons
 nfldata8 = load_pbp(2016:2024)
 
 # wrangle data into new tibble

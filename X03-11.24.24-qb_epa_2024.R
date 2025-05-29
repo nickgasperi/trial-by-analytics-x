@@ -1,5 +1,5 @@
 # load packages
-library(tidyverse)   # data wrangling
+library(tidyverse)
 library(nflfastR)
 library(nflplotR)
 library(nflreadr)

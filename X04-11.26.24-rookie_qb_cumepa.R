@@ -1,6 +1,6 @@
 # load packages
-library(tidyverse)   # data wrangling
-library(ggrepel)     # replaces geom_text()
+library(tidyverse)
+library(ggrepel)
 library(nflfastR)
 library(nflreadr)
 library(nflplotR)

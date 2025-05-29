@@ -1,12 +1,10 @@
 # load packages
 library(tidyverse)
-library(dplyr)
-library(ggplot2)
 library(nflfastR)
 library(nflplotR)
 library(nflreadr)
 
-# load data
+# load NFL data from '18-'23 seasons
 pmdata1 = load_pbp(2018:2023)
 
 # define divisional games for KC
