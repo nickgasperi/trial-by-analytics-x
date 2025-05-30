@@ -67,7 +67,6 @@ wrplot6 = ggplot(data = wrdata6,
   coord_cartesian(clip = "off") +
   annotation_custom(cinLogo,
                     x = 4950, y = 1795,
-                    
                     xmax = 5600, ymax = 2000) +
   labs(title = "Ja'Marr Chase Triple Crown - Receiving Yards",
        subtitle = "2024 NFL Regular Season",

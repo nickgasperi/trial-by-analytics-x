@@ -24,10 +24,11 @@ champdatarush = nfldata %>%
   print(n = Inf)
 
 # create plot
-champplotrush = ggplot(data = champdatarush, aes(x = epaper,
-                                                 xend = 0,
-                                                 y = reorder(rusher_player_id, epaper),
-                                                 yend = rusher_player_id)) +
+champplotrush = ggplot(data = champdatarush,
+                       aes(x = epaper,
+                           xend = 0,
+                           y = reorder(rusher_player_id, epaper),
+                           yend = rusher_player_id)) +
   geom_vline(xintercept = 0,
              linetype = "dashed",
              color = "darkgrey") +

@@ -30,10 +30,11 @@ day2rec = nfldata %>%
 
 # plot data
 # geom_segment() replaces geom_col() - use geom_nfl_logos() instead of geom_point()
-day2recplot = ggplot(data = day2rec, aes(x = avgepa,
-                                         xend = 0,
-                                         y = reorder(receiver_player_id, avgepa),
-                                         yend = receiver_player_id)) +
+day2recplot = ggplot(data = day2rec,
+                     aes(x = avgepa,
+                         xend = 0,
+                         y = reorder(receiver_player_id, avgepa),
+                         yend = receiver_player_id)) +
   geom_vline(xintercept = 0,
              linetype = "dashed",
              color = "darkgrey") +

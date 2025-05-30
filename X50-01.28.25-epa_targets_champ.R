@@ -50,7 +50,8 @@ champplotrec = ggplot(data = champdatarec,
   labs(title = "Volume vs. Efficiency of Targets",
        subtitle = "2024 AFC/NFC Championships | min. 3 targets",
        caption = "By Nick Gasperi | @tbanalysis | Data @nflfastR",
-       x = "Targets", y = "EPA/Target") +
+       x = "Targets",
+       y = "EPA/Target") +
   theme_minimal() +
   theme(plot.background = element_rect(fill = "#F0F0F0"),
         plot.title = element_text(hjust = 0.5,

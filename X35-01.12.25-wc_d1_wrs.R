@@ -28,10 +28,11 @@ wk19wr1 = nfldata1 %>%
 
 # plot data
 # geom_segment() replaces geom_col() - use geom_nfl_logos() instead of geom_point()
-wk19plot2 = ggplot(data = wk19wr1, aes(x = avgepa,
-                                       xend = 0,
-                                       y = reorder(receiver_player_id, avgepa),
-                                       yend = receiver_player_id)) +
+wk19plot2 = ggplot(data = wk19wr1,
+                   aes(x = avgepa,
+                       xend = 0,
+                       y = reorder(receiver_player_id, avgepa),
+                       yend = receiver_player_id)) +
   geom_vline(xintercept = 0,
              linetype = "dashed",
              color = "darkgrey") +

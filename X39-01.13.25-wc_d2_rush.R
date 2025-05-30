@@ -15,7 +15,9 @@ day2rush = nfldata %>%
          posteam == "GB" | posteam == "PHI" | posteam == "TB",
          !is.na(epa),
          !is.na(rusher_player_id)) %>%
-  group_by(rusher_player_id, rusher_player_name, posteam) %>%
+  group_by(rusher_player_id,
+           rusher_player_name,
+           posteam) %>%
   summarize(rushes = n(),
             avgepa = sum(epa)/sum(rushes),
             totepa = sum(epa),
@@ -26,10 +28,11 @@ day2rush = nfldata %>%
 
 # plot data
 # geom_segment() replaces geom_col() - use geom_nfl_logos() instead of geom_point()
-day2rushplot = ggplot(data = day2rush, aes(x = avgepa,
-                                           xend = 0,
-                                           y = reorder(rusher_player_id, avgepa),
-                                           yend = rusher_player_id)) +
+day2rushplot = ggplot(data = day2rush,
+                      aes(x = avgepa,
+                          xend = 0,
+                          y = reorder(rusher_player_id, avgepa),
+                          yend = rusher_player_id)) +
   geom_vline(xintercept = 0,
              linetype = "dashed",
              color = "darkgrey") +

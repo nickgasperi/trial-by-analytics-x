@@ -9,10 +9,10 @@ prepdata = load_pbp(2024)
 
 # create tibble 1 for passing data
 passdata = prepdata %>%
-  filter(week > 12,                                 # include weeks 1-11 
-         play_type == "pass",                       # only passing plays
+  filter(week > 12, 
+         play_type == "pass",
          qb_kneel == 0,
-         qb_spike == 0,              # exclude QB kneels and spikes          
+         qb_spike == 0,   
          !is.na(air_yards),
          !is.na(epa)) %>%
   group_by(defteam) %>%
@@ -23,8 +23,8 @@ passdata = prepdata %>%
 
 # create tibble 2 for rushing data
 rushdata = prepdata %>%
-  filter(week > 12,                                 # include weeks 1-11 
-         play_type == "run",                        # only passing plays
+  filter(week > 12,  
+         play_type == "run",
          qb_kneel == 0,
          !is.na(yards_gained),
          !is.na(epa)) %>%

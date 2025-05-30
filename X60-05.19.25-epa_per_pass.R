@@ -10,9 +10,9 @@ nfldata = load_pbp(2024)
 
 # wrangle data into new tibble
 totalepa = nfldata %>%
-  filter(week < 19,              # include only regular season plays
-         play_type == "pass",    # include only passing plays
-         qb_spike == 0,          # exclude spikes
+  filter(week < 19,
+         play_type == "pass",
+         qb_spike == 0,
          !is.na(epa)) %>%
   group_by(id,
            name,

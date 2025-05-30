@@ -26,10 +26,11 @@ wk19rb1 = nfldata1 %>%
 
 # plot data
 # geom_segment() replaces geom_col() - use geom_nfl_logos() instead of geom_point()
-wk19plot3 = ggplot(data = wk19rb1, aes(x = avgepa,
-                                       xend = 0,
-                                       y = reorder(rusher_player_id, avgepa),
-                                       yend = rusher_player_id)) +
+wk19plot3 = ggplot(data = wk19rb1,
+                   aes(x = avgepa,
+                       xend = 0,
+                       y = reorder(rusher_player_id, avgepa),
+                       yend = rusher_player_id)) +
   geom_vline(xintercept = 0,
              linetype = "dashed",
              color = "darkgrey") +
