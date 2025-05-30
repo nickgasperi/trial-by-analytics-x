@@ -1,5 +1,5 @@
 # load packages
-library(tidyverse)   # data wrangling
+library(tidyverse)
 library(nflfastR)
 library(nflplotR)
 library(nflreadr)
@@ -11,7 +11,8 @@ prepdata = load_pbp(2024)
 passdata = prepdata %>%
   filter(week > 12,                                 # include weeks 1-11 
          play_type == "pass",                       # only passing plays
-         qb_kneel == 0, qb_spike == 0,              # exclude QB kneels and spikes          
+         qb_kneel == 0,
+         qb_spike == 0,              # exclude QB kneels and spikes          
          !is.na(air_yards),
          !is.na(epa)) %>%
   group_by(defteam) %>%
