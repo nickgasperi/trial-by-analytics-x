@@ -9,7 +9,7 @@ data24 = load_pbp(2024)
 
 # wrangle data into new tibble
 qbepa = data24 %>%
-  filter(week < 12,                     # include only passes from weeks 1-11
+  filter(week < 12,
          play_type == "pass",
          !is.na(air_yards),
          !is.na(epa)) %>% 

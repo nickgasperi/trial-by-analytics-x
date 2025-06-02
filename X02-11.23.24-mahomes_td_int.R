@@ -30,7 +30,8 @@ mahomesratioplot = ggplot(data = mahomesdata1,
   labs(title = "Mahomes Touchdown to Interception Ratio By Year",
        subtitle = "Regular Season & Postseason",
        caption = "By Nick Gasperi | @tbanalysis | Data @nflfastR",
-       x = "Season", y = "TD:Int Ratio",
+       x = "Season",
+       y = "TD:Int Ratio",
        tag = "00-0033873") +                  # declaring tag to be used when adding player image in theme()
   geom_line(aes(color = posteam),
             linewidth = 1.3) +

@@ -75,20 +75,24 @@ plot_rpepa_2412 = ggplot(data = pbp2412_rp,
   annotate("text",
            label = "Flores Zone",
            x = -0.27, y = 0,
-           size = 6.5, color = "green",
+           size = 6.5,
+           color = "green",
            fontface = "bold.italic") +
   annotate("text",
            label = "Ravens",
            x = -0.2, y = 0.17,
-           size = 6.5, color = "purple") + 
+           size = 6.5,
+           color = "purple") + 
   annotate("text",
            label = "Solid",
            x = -0.17, y = -0.07,
-           size = 6.5, color = "green") +
+           size = 6.5,
+           color = "green") +
   annotate("text",
            label = "Maybe Next Year",
            x = 0.02, y = 0.25,
-           size = 6.5, color = "red") + 
+           size = 6.5,
+           color = "red") + 
   labs(title = "2024 NFL Defenses Weeks 1-12",
        subtitle = "EPA Per Play Allowed - Rushing vs. Passing",
        caption = "By Nick Gasperi | @tbanalysis | Data @nflfastR",
@@ -138,28 +142,34 @@ plot_rpyd_2412 = ggplot(data = pbp2412_rp,
   annotate("text",
            label = "Great",
            x = 3.5, y = 5.2,
-           size = 6.5, color = "green",
+           size = 6.5,
+           color = "green",
            fontface = "bold") +
   annotate("text",
            label = "Solid",
            x = 3.92, y = 5.15,
-           size = 6.5, color = "green") +
+           size = 6.5,
+           color = "green") +
   annotate("text",
            label = "Vulnerable",
            x = 3.3, y = 6,
-           size = 6.5, color = "orange") +
+           size = 6.5,
+           color = "orange") +
   annotate("text",
            label = "Serviceable",
            x = 4.5, y = 5.4,
-           size = 6.5, color = "orange") +
+           size = 6.5,
+           color = "orange") +
   annotate("text",
            label = "Unreliable",
            x = 4.8, y = 6.7,
-           size = 6.5, color = "red") +
+           size = 6.5,
+           color = "red") +
   annotate("text",
            label = "Fire Doug",
            x = 3.93, y = 7.06,
-           size = 6.5, color = "red",
+           size = 6.5,
+           color = "red",
            fontface = "bold") +
   theme_bw() +
   theme(plot.title = element_text(face = "bold", 

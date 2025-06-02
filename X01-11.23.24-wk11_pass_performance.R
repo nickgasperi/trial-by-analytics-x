@@ -9,8 +9,6 @@ library(nflplotR)
 pbp24 = load_pbp(2024)
 
 # wrangle data into new tibble
-# include only passing plays from week 11
-# 
 wk11_24_pass_air_epa = pbp24 %>%
   filter(week == 11,
           play_type == "pass",
