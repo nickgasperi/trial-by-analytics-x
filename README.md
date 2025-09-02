@@ -4,4 +4,4 @@ This repository hosts the R code used to create each *Trial By Analytics* post o
 
 Each post has one associated file inside this repository that contains all code used to create the contents of the post.
 
-[*Click here*](https://x.com/tbanalysis) to view Trial By Analytics' account on X.
+[*Click here*](https://www.x.com/tbanalysis) to view Trial By Analytics' account on X.
