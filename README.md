@@ -1,4 +1,4 @@
-# **Trial By Analytics on X: R Code**
+# **Trial By Analytics on X**
 
 This repository hosts the R code used to create each *Trial By Analytics* post on X.
 
