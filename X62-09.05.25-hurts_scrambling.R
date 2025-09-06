@@ -9,7 +9,7 @@ library(grid)
 # load eagles logo image
 image = "C:/Users/Nick Gasperi/Downloads/Philadelphia-Eagles-Logo-1987-1995.png"
 
-# download image to R
+# download image in R
 eagles_logo = readPNG(image) %>%
   rasterGrob(interpolate = TRUE)
 
@@ -65,8 +65,8 @@ hurtsplot1 = ggplot(data = hurts1,
            color = "red",
            fontface = "italic",
            size = 4.8) +
-  labs(title = "J. Hurts Scramble Rate vs. EPA/Dropback by Game",
-       subtitle = "*min. 20 dropbacks",
+  labs(title = "J. Hurts Scramble Rate vs. EPA/Dropback",
+       subtitle = "*regular season games (min. 20 dropbacks)",
        x = "Scramble Rate",
        y = "EPA/Dropback",
        caption = "By Nick Gasperi | @tbanalysis | data @nflfastR") +
@@ -82,7 +82,7 @@ hurtsplot1 = ggplot(data = hurts1,
                                   size = 22,
                                   color ="#CCCCCC"),
         plot.subtitle = element_text(face = "bold.italic",
-                                     size = 18,
+                                     size = 15,
                                      color = "#CCCCCC"),
         plot.caption = element_text(size = 13,
                                     color = "#CCCCCC"),
