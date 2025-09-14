@@ -51,7 +51,7 @@ qb_tot_data = qb_adot_data %>%
 qb_tot_data %>%
   print(n = Inf)
 
-# plot
+# plot average depth of target vs. success rate 
 qb_tot_plot = ggplot(data = qb_tot_data,
                       aes(x = adot, y = succ_rate)) +
   geom_hline(yintercept = mean(qb_tot_data$succ_rate),
@@ -95,4 +95,3 @@ ggsave("X post 65 - qb_performance.png",
        width = 10.5, height = 7,
        dpi = "retina")  
   
-
