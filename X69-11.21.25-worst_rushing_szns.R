@@ -1,3 +1,4 @@
+# load packages
 library(tidyverse)
 library(ggrepel)
 library(nflfastR)
