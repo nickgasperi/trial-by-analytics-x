@@ -6,9 +6,10 @@ library(nflreadr)
 
 # load 2020s nfl data
 nfldata20 = load_pbp(2020:2025)
-# regular season worst rushing totals by player and season
-# cannot use play_type since it won't count kneels/scrambles/others, so use !is.na(rusher_player_id)
-# include players with at least 20 attempts and yards per rush less than 1.5
+
+# create new tibble to fetch rush att, tot yds, ypc
+# cannot use play_type to specify rushing plays since it won't count kneels/scrambles/others, so use !is.na(rusher_player_id)
+# filter to include players with at least 20 attempts and yards per rush less than 1.5
 rushing_data = nfldata20 %>%
   filter(!is.na(rusher_player_id),
          season_type == "REG") %>%
@@ -24,7 +25,7 @@ rushing_data = nfldata20 %>%
   arrange(ypc) %>%
   print(n = Inf)
 
-# add extra column for label
+# add extra column for plot label
 rushing_data$label_id = paste(rushing_data$rusher_player_name,
                               rushing_data$season,
                               sep = ", ")
@@ -49,7 +50,7 @@ rushing_plot = ggplot(data = rushing_data,
        subtitle = "2020-2025 Reg. Seasons (thru '25 Wk 11) | size = attempts | min. 20 attempts",
        x = "Total Rush Yards",
        y = "Yards Per Carry",
-       caption = "") +
+       caption = "By Nick Gasperi | @tbanalysis | data @nflfastR") +
   theme_minimal() +
   theme(legend.position = "none",
         plot.background = element_rect(fill = "white"),
@@ -69,5 +70,3 @@ rushing_plot
 ggsave("X post 69 - worst_rushing_szns.png",
        width = 10.5, height = 7,
        dpi = "retina")
-
-
