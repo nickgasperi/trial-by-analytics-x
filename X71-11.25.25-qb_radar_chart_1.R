@@ -10,7 +10,7 @@ library(scales)
 # load 2025 pbp data
 nfldata25 = load_pbp(2025)
 
-# load tibble with easy trial data
+# load tibble with 2025 passing data
 trialdata25 = nfldata25 %>%
   filter(!is.na(passer_player_name),
          !is.na(air_yards)) %>%
@@ -31,7 +31,8 @@ trialdata25_a = column_to_rownames(trialdata25,
 # view new dataframe
 head(trialdata25_a)
 
-# 
+# add 2 rows to dataset - one for max values and another for min values of each column
+# radarchart() uses these to define limits of charting area
 trialdata25_b = rbind(max = apply(trialdata25_a,
                                 2,
                                 max),
@@ -50,9 +51,6 @@ trialdata25_b = trialdata25_b %>%
          'ADOT' = adot,
          'Pass TDs' = passtds,
          'Comp %' = comppct)
-
-# base plot
-radarchart(trialdata25_b)
 
 # select 3 players to start with in a new dataframe, then rerun the radarchart with the new filtered dataframe
 trialdata25_select = trialdata25_b[c("max",
@@ -110,55 +108,3 @@ mtext("By Nick Gasperi | @tbanalysis | data @nflfastR",
 
 # close graphics -> write file
 dev.off()
-
-# sample soccer data ------------------------------------------------------
-
-# convert to dataframe
-socdata = as.data.frame(sample.data.radar)
-
-# view df
-socdata
-
-# convert name row to row titles
-socdata1a = column_to_rownames(socdata,
-                                   var = "player_name")
-
-# view updated dataframe
-socdata1a
-
-# add max and min values to dataset
-socdata_trial = rbind(max = apply(socdata1a,
-                                  2,
-                                  max),
-                      min = apply(socdata1a,
-                                  2,
-                                  min),
-                      socdata1a)
-
-# change scale for percentage variables to 0 - 100
-socdata_trial["max", "pass_accuracy"] = 1
-socdata_trial["min", "pass_accuracy"] = 0
-
-
-# view updated dataframe
-socdata_trial
-
-# chart data
-radarchart(socdata_trial,
-           pcol = c("blue", "red3", "orange2"),
-           plwd = 2,
-           plty = 1,
-           pfcol = alpha(c("blue", "red3", "orange2"), 0.5),
-           cglcol = "grey",
-           cglty = 1)
-
-# add legend to chart
-legend(x = 1.3,
-       y = 1.1,
-       legend = rownames(socdata_trial)[-c(1,2)],
-       col = c("blue", "red3", "orange2"),
-       lwd = 2,
-       lty = 1,
-       bty = "n")
-
-
