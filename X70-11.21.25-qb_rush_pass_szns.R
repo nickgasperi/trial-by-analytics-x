@@ -8,7 +8,7 @@ library(nflreadr)
 # load 2020s nfl data
 nfldata20 = load_pbp(2020:2025)
 
-# going to create two tibbles - one for passing and another for rushing - will join tibbles at end
+# create two tibbles - one for passing and another for rushing - will join tibbles later
 # create passing tibble first, as this will define the group that will appear on the plot
 
 # tibble 1 - passing
@@ -79,23 +79,30 @@ all_qb_data_a = all_qb_data %>%
   filter(pass_yd_per_game >= 260) %>%
   print(n = Inf)
 
+# add extra column for plot label
+all_qb_data_a$label_id = paste(all_qb_data_a$player_name,
+                               all_qb_data_a$season,
+                              sep = ", ")
+
 # plot data
 all_qb_plot = ggplot(data = all_qb_data_a,
                      aes(x = rush_yd_per_game,
                          y = pass_yd_per_game)) +
   geom_hline(yintercept = mean(all_qb_data_a$pass_yd_per_game),
              linetype = "dashed",
-             color = "grey20") +
+             color = "grey20",
+             alpha = 0.6) +
   geom_vline(xintercept = mean(all_qb_data_a$rush_yd_per_game),
              linetype = "dashed",
-             color = "grey20") +
+             color = "grey20",
+             alpha = 0.6) +
   geom_point(aes(color = posteam)) +
   scale_color_nfl(type = "primary") +
-  geom_text_repel(box.padding = 0.5,
-                  aes(label = player_name,
+  geom_text_repel(box.padding = 0.3,
+                  aes(label = label_id,
                       color = posteam)) +
-  labs(title = "Top 20 Pass Yards per Game + Rush Yards per Game",
-       subtitle = "2020-2025 Reg. Seasons (thru '25 Wk 11) | min. 351 attempts",
+  labs(title = "Single-Season Pass Yards per Game Leaders - Rushing vs. Passing",
+       subtitle = "2020-2025 NFL Reg. Seasons (thru '25 Wk 11) | min. 351 pass att.",
        x = "Rush Yd./Game",
        y = "Pass Yd./Game",
        caption = "By Nick Gasperi | @tbanalysis | data @nflfastR") +
@@ -108,8 +115,8 @@ all_qb_plot = ggplot(data = all_qb_data_a,
                                      size = 16),
         plot.caption = element_text(size = 12),
         axis.title = element_text(face = "bold",
-                                  size = 14),
-        axis.text = element_text(size = 13))
+                                  size = 13),
+        axis.text = element_text(size = 12))
 
 # view plot
 all_qb_plot
