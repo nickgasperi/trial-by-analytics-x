@@ -101,8 +101,8 @@ all_qb_plot = ggplot(data = all_qb_data_a,
   geom_text_repel(box.padding = 0.3,
                   aes(label = label_id,
                       color = posteam)) +
-  labs(title = "Single-Season Pass Yards per Game Leaders - Rushing vs. Passing",
-       subtitle = "2020-2025 NFL Reg. Seasons (thru '25 Wk 11) | min. 351 pass att.",
+  labs(title = "QB Rush vs. Pass Yards per Game",
+       subtitle = "2020-2025 NFL Reg. Seasons (thru '25 Wk 11) | min. 351 pass att. | min. 260 pass yd./game",
        x = "Rush Yd./Game",
        y = "Pass Yd./Game",
        caption = "By Nick Gasperi | @tbanalysis | data @nflfastR") +
@@ -112,7 +112,7 @@ all_qb_plot = ggplot(data = all_qb_data_a,
         plot.title = element_text(face = "bold",
                                   size = 18),
         plot.subtitle = element_text(face = "bold",
-                                     size = 16),
+                                     size = 14),
         plot.caption = element_text(size = 12),
         axis.title = element_text(face = "bold",
                                   size = 13),
@@ -125,4 +125,3 @@ all_qb_plot
 ggsave("X post 70 - qb_rush_pass.png",
        width = 10.5, height = 7,
        dpi = "retina")
-
