@@ -101,7 +101,3 @@ qb_plot_1
 ggsave("X post 74 - epa_late_dropbacks.png",
        width = 10.5, height = 7,
        dpi = "retina")
-
-
-
-  
