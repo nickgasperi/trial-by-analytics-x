@@ -28,6 +28,16 @@ qb_data_26_1 = data26_1 %>%
 # plot adot vs. cpoe
 qb_data_26_plot = ggplot(data = qb_data_26_1,
                          aes(x = adot, y = cpoe)) +
+  annotate("rect",
+           xmin = -Inf, xmax = mean(qb_data_26_1$adot),
+           ymin = -Inf, ymax = mean(qb_data_26_1$cpoe),
+           fill = "red",
+           alpha = 0.1) +
+  annotate("rect",
+           xmin = mean(qb_data_26_1$adot), xmax = Inf,
+           ymin = mean(qb_data_26_1$cpoe), ymax = Inf,
+           fill = "darkgreen",
+           alpha = 0.1) +
   geom_hline(yintercept = mean(qb_data_26_1$cpoe),
              linetype = "dashed",
              color = "grey20",
@@ -46,7 +56,7 @@ qb_data_26_plot = ggplot(data = qb_data_26_1,
                   aes(label = passer_player_name,
                       color = posteam)) +
   scale_color_nfl() +
-  labs(title = "ADOT vs. CPOE",
+  labs(title = "Avg. Depth of Target vs. Completion Pct. Over Expected",
        subtitle = "2026 NFL Week 1",
        x = "ADOT",
        y = "CPOE",
