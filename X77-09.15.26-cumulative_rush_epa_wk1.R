@@ -9,9 +9,12 @@ library(nflplotR)
 data26_1 = load_pbp(2026)
 
 # filter to running plays & get running epa total by rusher
+# exclude qb kneels and sacks
 rush_data_26_1 = data26_1 %>%
   filter(!is.na(rusher_player_id),
-         !is.na(yards_gained)) %>%
+         !is.na(yards_gained),
+         sack == 0,
+         qb_kneel == 0) %>%
   group_by(play_id,
            rusher_player_id,
            rusher_player_name,
@@ -42,7 +45,7 @@ rush_26_1_plot = ggplot(data = rush_data_26_1,
                                       "00-0039139",
                                       "00-0036875"),
               label_key = rusher_player_name,
-              label_params = list(size = 5),
+              label_params = list(size = 5.1),
               use_direct_label = TRUE,
               use_group_by = FALSE,
               unhighlighted_params = list(linewidth = 0.5)) +
