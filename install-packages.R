@@ -1,4 +1,4 @@
-# if you are new to RStudio, run the following code to install necessary packages:
+# install packages to load, transform, and visualize data in R
 
 install.packages("tidyverse")
 install.packages("ggrepel")
@@ -7,7 +7,7 @@ install.packages("gt")
 install.packages("gtExtras")
 install.packages("gghighlight")
 
-# if you have not loaded the NFL play-by-play packages, run the following code:
+# load packages to obtain access to NFL data and additional visualization options
 
 install.packages("nflfastR")
 install.packages("nflreadr")
