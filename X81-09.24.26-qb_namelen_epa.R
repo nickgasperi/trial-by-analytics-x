@@ -56,7 +56,7 @@ epa_name_plot = ggplot(data = passers26,
                       color = posteam)) +
   scale_color_nfl(type = "primary") +
   labs(title = "QB Last Name Length vs. EPA Per Dropback",
-       subtitle = "2026 NFL Wk 1-2 | size = # of dropbacks",
+       subtitle = "2026 NFL Wk 1-2 | min. 30 dropbacks | size = # of dropbacks",
        caption = "By Nick Gasperi | @tbanalysis | Data @nflfastR",
        x = "# of Letters",
        y = "EPA/Dropback") +
