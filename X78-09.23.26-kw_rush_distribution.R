@@ -67,7 +67,8 @@ rush_area_plot_test = rush_area_25 %>%
        y = "Yards Gained",
        tag = "SEA") +
   theme_minimal() +
-  theme(plot.background = element_rect(fill = "white"),
+  theme(plot.background = element_rect(fill = "white",
+                                       color = NA),
         plot.title = element_text(face = "bold",
                                   size = 19),
         plot.subtitle = element_text(size = 16),

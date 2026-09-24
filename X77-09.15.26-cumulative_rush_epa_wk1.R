@@ -56,7 +56,8 @@ rush_26_1_plot = ggplot(data = rush_data_26_1,
        y = "Cumulative EPA",
        caption = "By Nick Gasperi | @tbanalysis | data @nflfastR") +
   theme_minimal() +
-  theme(plot.background = element_rect(fill = "white"),
+  theme(plot.background = element_rect(fill = "white",
+                                       color = NA),
         plot.title = element_text(face = "bold",
                                   size = 17),
         plot.subtitle = element_text(size = 16),
