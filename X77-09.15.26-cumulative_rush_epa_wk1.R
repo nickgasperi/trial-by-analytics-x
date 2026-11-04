@@ -11,7 +11,8 @@ data26_1 = load_pbp(2026)
 # filter to running plays & get running epa total by rusher
 # exclude qb kneels and sacks
 rush_data_26_1 = data26_1 %>%
-  filter(!is.na(rusher_player_id),
+  filter(week == 1,
+         !is.na(rusher_player_id),
          !is.na(yards_gained),
          sack == 0,
          qb_kneel == 0) %>%
@@ -20,7 +21,7 @@ rush_data_26_1 = data26_1 %>%
            rusher_player_name,
            posteam) %>%
   summarize(att = n(),
-            epa = sum(epa),
+            epa = epa,
             .groups = "drop")
 
 # add cumulative rush att. and cumulative epa columns to tibble
