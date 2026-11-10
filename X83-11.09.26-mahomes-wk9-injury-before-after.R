@@ -70,7 +70,7 @@ pm_summary_9 = pm_data_9 %>%
 
             "ADOT" = mean(air_yards,
                         na.rm = TRUE),
-            "EPA/db" = mean(epa,
+            "EPA/Att" = mean(epa,
                           na.rm = TRUE),
             "CPOE" = mean(cpoe,
                           na.rm = TRUE)
@@ -95,7 +95,7 @@ gt_pm_9 = pm_tbl_9 %>%
               rows = Stat %in% c("Comp %", "Pass Y/A"),
               decimals = 1) %>%
   fmt_number(columns = c("Before", "After"),
-              rows = Stat %in% c("ADOT", "EPA/db", "CPOE"),
+              rows = Stat %in% c("ADOT", "EPA/Att", "CPOE"),
               decimals = 2) %>%
   tab_header(title = md("**Patrick Mahomes: Before vs. After Injury**"),
              subtitle = md("**2026 NFL Week 9 Passing Performance**")) %>%
